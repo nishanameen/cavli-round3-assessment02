@@ -1,0 +1,97 @@
+/* vs-prompt-chips (vividsites "Prompt Chips"). Rules below the variables are the upstream stylesheet unchanged;
+   this project only customises the variables at the top. */
+.vs-prompt-chips {
+  --vs-prompt-chips-accent: #c6f432;                 /* send button, caret, chip hover glyph */
+  --vs-prompt-chips-on-accent: #10200f;              /* icon on the accent */
+  --vs-prompt-chips-ink: #18201a;                    /* text */
+  --vs-prompt-chips-chip: #ffffff;                   /* chip fill */
+  --vs-prompt-chips-line: rgba(24,32,26,.1);         /* hairlines */
+  --vs-prompt-chips-field: #ffffff;                  /* the input */
+  --vs-prompt-chips-radius: 999px;                   /* chip radius */
+  --vs-prompt-chips-speed: 30;                       /* marquee px/s (read by the script) */
+  --vs-prompt-chips-fade: 12%;                       /* edge fade width */
+  --vs-prompt-chips-font: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  position: relative; display: grid; gap: 1.6rem; width: 100%;
+  color: var(--vs-prompt-chips-ink); font-family: var(--vs-prompt-chips-font); -webkit-font-smoothing: antialiased;
+}
+/* on a dark page: data-theme="dark" */
+.vs-prompt-chips[data-theme="dark"] {
+  --vs-prompt-chips-ink: #eef4e8; --vs-prompt-chips-chip: rgba(236,248,228,.06); --vs-prompt-chips-line: rgba(236,248,228,.12);
+  --vs-prompt-chips-field: rgba(236,248,228,.07);
+}
+.vs-prompt-chips, .vs-prompt-chips * { box-sizing: border-box; }
+
+/* ---- the input ---- */
+.vs-prompt-chips-bar {
+  position: relative; display: flex; align-items: flex-end; gap: .5rem; width: min(40rem, 100%); margin: 0 auto;
+  padding: .45rem .45rem .45rem 1.35rem; border-radius: 1.25rem; background: var(--vs-prompt-chips-field);
+  box-shadow: inset 0 0 0 .5px var(--vs-prompt-chips-line), inset 0 1px 0 rgba(255,255,255,.07), 0 18px 40px -18px rgba(0,0,0,.45), 0 2px 6px -2px rgba(0,0,0,.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3);
+  transition: box-shadow .35s cubic-bezier(.2,0,0,1);
+}
+.vs-prompt-chips:not([data-theme="dark"]) .vs-prompt-chips-bar { box-shadow: inset 0 0 0 .5px var(--vs-prompt-chips-line), 0 18px 40px -20px rgba(20,40,20,.25), 0 2px 6px -2px rgba(20,40,20,.08); }
+.vs-prompt-chips-bar:focus-within { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vs-prompt-chips-accent) 55%, transparent), 0 0 0 4px color-mix(in srgb, var(--vs-prompt-chips-accent) 14%, transparent), 0 18px 40px -18px rgba(0,0,0,.45); }
+.vs-prompt-chips-bar.is-filled { animation: vs-prompt-chips-glow .9s cubic-bezier(.16,1,.3,1); }
+@keyframes vs-prompt-chips-glow { 0% { box-shadow: inset 0 0 0 1px var(--vs-prompt-chips-accent), 0 0 0 0 color-mix(in srgb, var(--vs-prompt-chips-accent) 45%, transparent); } 100% { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vs-prompt-chips-accent) 55%, transparent), 0 0 0 14px transparent; } }
+.vs-prompt-chips-input {
+  all: unset; box-sizing: border-box; display: block; flex: 1; min-width: 0; resize: none; overflow-y: auto; scrollbar-width: none;
+  min-height: 2.75rem; max-height: 7.2rem; padding: .66rem 0; white-space: pre-wrap; overflow-wrap: anywhere;
+  font: 400 1.0625rem/1.4 var(--vs-prompt-chips-font); letter-spacing: -.005em;
+  color: var(--vs-prompt-chips-ink); caret-color: var(--vs-prompt-chips-accent);
+}
+.vs-prompt-chips-input::-webkit-scrollbar { display: none; }
+.vs-prompt-chips-input::placeholder { color: color-mix(in srgb, var(--vs-prompt-chips-ink) 42%, transparent); }
+.vs-prompt-chips-send {
+  all: unset; flex: none; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: .9rem; cursor: pointer;
+  background: var(--vs-prompt-chips-accent); color: var(--vs-prompt-chips-on-accent);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), inset 0 -1px 0 rgba(0,0,0,.12), 0 6px 16px -6px color-mix(in srgb, var(--vs-prompt-chips-accent) 70%, transparent);
+  transition: transform .45s cubic-bezier(.3,1.5,.5,1), opacity .25s, filter .25s, box-shadow .25s;
+}
+.vs-prompt-chips-send svg { width: 1.15rem; height: 1.15rem; transition: transform .45s cubic-bezier(.3,1.5,.5,1); }
+.vs-prompt-chips-send:hover:not(:disabled) svg { transform: translateY(-2px); }
+.vs-prompt-chips-send:active:not(:disabled) { transform: scale(.92); }
+.vs-prompt-chips-send:focus-visible { box-shadow: 0 0 0 2px color-mix(in srgb, var(--vs-prompt-chips-ink) 90%, transparent); }
+.vs-prompt-chips-send:disabled { cursor: default; opacity: .3; filter: saturate(.2); box-shadow: none; transform: scale(.94); }
+
+/* ---- the rows ---- */
+.vs-prompt-chips-rows { display: grid; gap: .7rem; }
+.vs-prompt-chips-row {
+  position: relative; overflow: hidden; padding: .35rem 0; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--vs-prompt-chips-fade), #000 calc(100% - var(--vs-prompt-chips-fade)), transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 var(--vs-prompt-chips-fade), #000 calc(100% - var(--vs-prompt-chips-fade)), transparent);
+}
+.vs-prompt-chips-row.is-dragging { cursor: grabbing; }
+.vs-prompt-chips-track { display: flex; gap: .6rem; width: max-content; will-change: transform; }
+.vs-prompt-chips-chip {
+  all: unset; box-sizing: border-box; flex: none; display: inline-flex; align-items: center; gap: .55rem; cursor: pointer;
+  height: 2.6rem; padding: 0 1.05rem 0 .85rem; border-radius: var(--vs-prompt-chips-radius); white-space: nowrap;
+  font: 400 .96875rem/1 var(--vs-prompt-chips-font); letter-spacing: -.005em; color: color-mix(in srgb, var(--vs-prompt-chips-ink) 86%, transparent);
+  background: var(--vs-prompt-chips-chip);
+  box-shadow: inset 0 0 0 .5px var(--vs-prompt-chips-line), inset 0 1px 0 rgba(255,255,255,.05);
+  transition: background-color .2s cubic-bezier(.2,0,0,1), color .2s, box-shadow .2s, transform .5s cubic-bezier(.3,1.6,.5,1);
+  -webkit-tap-highlight-color: transparent;
+}
+.vs-prompt-chips:not([data-theme="dark"]) .vs-prompt-chips-chip { box-shadow: inset 0 0 0 .5px var(--vs-prompt-chips-line), 0 1px 2px rgba(20,40,20,.06); }
+.vs-prompt-chips-chip svg { width: 1rem; height: 1rem; flex: none; opacity: .6; transition: opacity .2s, color .2s, transform .5s cubic-bezier(.3,1.6,.5,1); }
+.vs-prompt-chips-chip:hover { color: var(--vs-prompt-chips-ink); background: color-mix(in srgb, var(--vs-prompt-chips-ink) 11%, transparent); transform: translateY(-2px); }
+.vs-prompt-chips:not([data-theme="dark"]) .vs-prompt-chips-chip:hover { background: #fff; box-shadow: inset 0 0 0 .5px var(--vs-prompt-chips-line), 0 8px 18px -8px rgba(20,40,20,.25); }
+.vs-prompt-chips-chip:hover svg { opacity: 1; color: var(--vs-prompt-chips-accent); transform: rotate(-8deg) scale(1.08); }
+.vs-prompt-chips:not([data-theme="dark"]) .vs-prompt-chips-chip:hover svg { color: color-mix(in srgb, var(--vs-prompt-chips-accent) 55%, #18201a); }
+.vs-prompt-chips-chip:active { transform: translateY(0) scale(.95); transition-duration: .2s, .2s, .2s, .12s; }
+.vs-prompt-chips-chip:focus-visible { box-shadow: inset 0 0 0 1.5px var(--vs-prompt-chips-accent); color: var(--vs-prompt-chips-ink); }
+.vs-prompt-chips-chip.is-picked { opacity: .35; }
+/* the flying copy */
+.vs-prompt-chips-ghost { position: fixed; left: 0; top: 0; z-index: 2147483000; pointer-events: none; margin: 0; will-change: transform, opacity; transition: none !important;
+  background: color-mix(in srgb, var(--vs-prompt-chips-accent) 22%, var(--vs-prompt-chips-chip)); color: var(--vs-prompt-chips-ink);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vs-prompt-chips-accent) 60%, transparent), 0 14px 30px -10px rgba(0,0,0,.4); }
+
+@media (max-width: 600px) {
+  .vs-prompt-chips { gap: 1.2rem; }
+  .vs-prompt-chips-bar { padding-left: 1.05rem; }
+  .vs-prompt-chips-chip { height: 2.4rem; font-size: .9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vs-prompt-chips-bar.is-filled { animation: none; }
+  .vs-prompt-chips *, .vs-prompt-chips-ghost { transition-duration: 0s !important; }
+}

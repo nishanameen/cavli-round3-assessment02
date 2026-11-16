@@ -1,0 +1,21 @@
+{
+  "doc_id": "c16qs-hardware-manual",
+  "revision": "5.4-SIMULATED",
+  "revision_label": "SIMULATED revision 5.4 - NOT a Cavli publication",
+  "revision_date": null,
+  "base_revision": "5.3",
+  "simulated": true,
+  "purpose": "Demonstrates re-indexing of a revised document, supersession of the older revision, passage-level change detection and expert review. Values below are invented for the demo and must never be cited as Cavli specifications.",
+  "edits": [
+    {
+      "pdf_page": 31,
+      "find": "Pull the pin low for 100-500ms to reset the module.",
+      "replace": "Pull the pin low for 150-500ms to reset the module."
+    },
+    {
+      "pdf_page": 10,
+      "find": "5.3 Updated variants and Band lists 07/12/2024",
+      "replace": "5.3 Updated variants and Band lists 07/12/2024\n5.4 [SIMULATED] Updated reset pulse width in Section 3.4.2"
+    }
+  ]
+}

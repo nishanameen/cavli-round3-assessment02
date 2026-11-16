@@ -1,0 +1,29 @@
+> python -m docintel ingest --refresh
+Ingesting sources from sources/manifest.json
+  HW   5.3                          unchanged  139 passages  (cache (hash verified))
+  EVK  1.1                          unchanged   28 passages  (cache (hash verified))
+  AT   3.1                          unchanged  462 passages  (cache (hash verified))
+  WEB  snapshot-20261114-c81b8bc8   unchanged   30 passages  (downloaded)
+Checks: {"band_conflicts": 4, "at_reference_gaps": 1, "stale_references": 1}
+
+
+> python -m docintel review
+#1 [open] conflict (high) bands:EAJ
+  EAJ variant LTE band list differs (cross-source); disputed bands: 38. Do not treat any disputed
+  band as confirmed.
+#2 [open] conflict (high) bands:LA
+  LA variant LTE band list differs (cross-source); disputed bands: 28. Do not treat any disputed
+  band as confirmed.
+#3 [open] conflict (high) bands:NA
+  NA variant LTE band list differs (cross-source); disputed bands: 13. Do not treat any disputed
+  band as confirmed.
+#4 [open] conflict (high) bands:WW
+  WW variant LTE band list differs (cross-source); disputed bands: 13, 38. Do not treat any disputed
+  band as confirmed.
+#5 [open] cross_reference_gap (medium) at:AT+TRB
+  AT+TRB is referenced in Cavli C16QS LTE CAT1.bis Module Hardware Manual (rev 5.3, page 31) but is
+  not documented in the current AT Command Manual.
+#6 [open] outdated_reference (low) stale:c16qs-evk-user-manual
+  Cavli C16QS EVK User Manual (Connection Manual) 1.1 (2023-03-07) is based on an unversioned
+  'Hardware Manual' but the current Cavli C16QS LTE CAT1.bis Module Hardware Manual is 5.3
+  (2024-12-07). Module statements in it may be outdated.

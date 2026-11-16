@@ -1,0 +1,170 @@
+{
+  "base": "https://cavli-assignment-2.nishanameenk.workers.dev",
+  "checked_at": "2026-11-15T14:07:11.473Z",
+  "passed": 18,
+  "total": 18,
+  "results": [
+    {
+      "name": "Reviewer gate rejects anonymous requests",
+      "passed": true,
+      "ms": 103,
+      "page_status": 401,
+      "api_status": 401
+    },
+    {
+      "name": "Page loads with logo, header, view switch, tabs and prompt chips",
+      "passed": true,
+      "ms": 1505,
+      "suggestion_chips": 13
+    },
+    {
+      "name": "Answerable: reset pin answer cites HW p. 31 with a working deep link",
+      "passed": true,
+      "ms": 3159,
+      "status": "Answered",
+      "answer": "The reset pin for the C16QS module is Pin 17, which is labeled as RSTN [1][2]. To reset the module, this pin must be pulled low for a duration of 100-500ms [1].",
+      "citation_links": [
+        "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=31",
+        "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=22"
+      ]
+    },
+    {
+      "name": "Retrieved passages and validation expand",
+      "passed": true,
+      "ms": 60,
+      "retrieved_rows": 6
+    },
+    {
+      "name": "Ambiguous: supply voltage asks module vs EVK and cites both",
+      "passed": true,
+      "ms": 3059,
+      "status": "Ambiguous · please clarify",
+      "cited_documents": [
+        "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+        "Cavli C16QS EVK User Manual (Connection Manual)"
+      ]
+    },
+    {
+      "name": "Conflict: WW Band 38 shows both sources and a review flag",
+      "passed": true,
+      "ms": 1507,
+      "status": "Conflicting evidence · expert review",
+      "flags": [
+        "#4 Conflicting sources (high): WW variant LTE band list differs (cross-source); disputed bands: 13, 38. Do not treat any disputed band as confirmed."
+      ]
+    },
+    {
+      "name": "Not verified: custom antenna shows related context only",
+      "passed": true,
+      "ms": 2012,
+      "status": "Not verified in available sources"
+    },
+    {
+      "name": "Not verified: MTBF is refused",
+      "passed": true,
+      "ms": 2387,
+      "status": "Not verified in available sources",
+      "mode": "2.30 s · hybrid search · AI-judged answerability · gemini:gemini-3.1-flash-lite · current sources"
+    },
+    {
+      "name": "Keyboard: Enter submits a typed question",
+      "passed": true,
+      "ms": 1869,
+      "answer": "The sim card socket type used in the C16QS EVK is a micro sim card socket."
+    },
+    {
+      "name": "Simulated view: banner, SIMULATED citation and previous wording",
+      "passed": true,
+      "ms": 3083,
+      "answer": "To reset the C16QS module, the reset pin (Pin 17) must be pulled low for 150-500ms. This information is provided in a simulated revision of the hardware manual.",
+      "warnings": [
+        "Cites a SIMULATED revision - not a Cavli publication.",
+        "Passage changed in 5.4-SIMULATED vs 5.3 (p. 31): was “software does not respond, the module can be reset. Pull the pin low for 100-500ms to reset the module. The” (review #13)."
+      ]
+    },
+    {
+      "name": "Audit mode: superseded 5.3 passage is labelled outdated",
+      "passed": true,
+      "ms": 20938,
+      "retrieved": [
+        "HW-v5.3-p031-2",
+        "HW-v5.4-SIMULATED-p031-2",
+        "HW-v5.4-SIMULATED-p022-1",
+        "HW-v5.3-p022-1",
+        "HW-v5.3-p024-1",
+        "HW-v5.4-SIMULATED-p030-3"
+      ],
+      "badges": []
+    },
+    {
+      "name": "Review queue (simulated view): revision diff, inline validation, resolve and reopen",
+      "passed": true,
+      "ms": 2899,
+      "item": "#13",
+      "diff": [
+        "+ 5.4 [SIMULATED] Updated reset pulse width in Section 3.4.2",
+        "− software does not respond, the module can be reset. Pull the pin low for 100-500ms to reset the module. The",
+        "+ software does not respond, the module can be reset. Pull the pin low for 150-500ms to reset the module. The"
+      ]
+    },
+    {
+      "name": "Sources (simulated view): 5 revisions incl. superseded 5.3 and SIMULATED 5.4",
+      "passed": true,
+      "ms": 250,
+      "sources": 5
+    },
+    {
+      "name": "Main view: 6 open review items, disputed bands bold, 4 sources with EVK page offset",
+      "passed": true,
+      "ms": 807,
+      "open_items": 6,
+      "sources": 4
+    },
+    {
+      "name": "Pipeline tab: 5 stages, per-document table, run history and a read-only update check",
+      "passed": true,
+      "ms": 1912,
+      "stages": [
+        "Acquire",
+        "Extract",
+        "Index",
+        "Check",
+        "Publish"
+      ],
+      "index_stage": "3 INDEX 659 passages 659 / 659 with meaning vectors; full-text index on all",
+      "update_check": [
+        "AT 3.1 | HTTP headers (ETag + size) | Unchanged",
+        "EVK 1.1 | HTTP headers (ETag + size) | Unchanged",
+        "HW 5.3 | HTTP headers | Cannot tell from headers",
+        "WEB snapshot-20261114-c81b8bc8 | page text fingerprint (Technical Data + Variants) | Unchanged"
+      ]
+    },
+    {
+      "name": "Answers report the search mode and show keyword and meaning columns",
+      "passed": true,
+      "ms": 2460,
+      "meta": "2.24 s · hybrid search · AI-judged answerability · gemini:gemini-3.1-flash-lite · current sources",
+      "headers": [
+        "Passage",
+        "Score",
+        "Keyword coverage",
+        "Meaning similarity",
+        "Document",
+        "Rev",
+        "Page",
+        "Section"
+      ]
+    },
+    {
+      "name": "Mobile 375 px: no horizontal overflow and answers render",
+      "passed": true,
+      "ms": 3265,
+      "overflow_px": 0
+    },
+    {
+      "name": "No console errors during the run",
+      "passed": true,
+      "ms": 0
+    }
+  ]
+}

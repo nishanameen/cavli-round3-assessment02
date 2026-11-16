@@ -1,0 +1,120 @@
+{
+  "description": "Predefined before the scored run. expected_sources lists acceptable supporting locations (printed page labels, or web section names). must_include groups: each group needs one alternative present in the answer (case-insensitive).",
+  "cases": [
+    {
+      "id": "E01", "category": "answerable",
+      "question": "Which pin resets the bare C16QS module, and how long must it be held low?",
+      "expected_behavior": "Answer pin 17 (RSTN), pulled low for 100-500 ms; cite the hardware manual Section 3.4.2.",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["31"]}],
+      "must_include": [["17"], ["100-500", "100 to 500", "100–500"]]
+    },
+    {
+      "id": "E02", "category": "answerable",
+      "question": "What are the VB operating conditions (minimum, typical and maximum voltage) for the C16QS?",
+      "expected_behavior": "3.1 V min, 3.8 V typical, 4.5 V max from Table 3.3 Operating Condition.",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["20", "13", "27", "60"]}],
+      "must_include": [["3.1"], ["3.8"], ["4.5"]]
+    },
+    {
+      "id": "E03", "category": "answerable",
+      "question": "What is jumper JMP 3 used for on the C16QS EVK?",
+      "expected_behavior": "Selects the EVK input power source: USB Type-C or +5V adapter; cite EVK manual component description.",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-evk-user-manual", "pages": ["13", "11", "17"]}],
+      "must_include": [["type-c", "usb"], ["5v", "adapter"]]
+    },
+    {
+      "id": "E04", "category": "answerable",
+      "question": "Which COM ports appear on the PC after the C16QS EVK has booted?",
+      "expected_behavior": "After full boot over USB Type-C: 2x COM for AT port and 1x COM for DM port.",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-evk-user-manual", "pages": ["20", "13"]}],
+      "must_include": [["AT"], ["DM", "logging"]]
+    },
+    {
+      "id": "E05", "category": "answerable",
+      "question": "Which AT command restarts the C16QS?",
+      "expected_behavior": "AT$QCRST (AT manual 16.31). The hardware manual's AT+TRB is not in the AT manual; if cited it must carry the cross-reference flag.",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-at-command-manual", "pages": ["193"]}],
+      "must_include": [["AT$QCRST"]]
+    },
+    {
+      "id": "E06", "category": "answerable",
+      "question": "What is the normal operating temperature range of the C16QS module?",
+      "expected_behavior": "-30 °C to +85 °C (Table 2.1 / Table 5.1).",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["14", "58"]}],
+      "must_include": [["30"], ["85"]]
+    },
+    {
+      "id": "E07", "category": "answerable",
+      "question": "Which LTE bands does the C16QS India (IN) variant support?",
+      "expected_behavior": "Bands 1, 3, 5, 8, 40, 41; all current sources agree, so no conflict flag.",
+      "expected_status": ["answered"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["12", "14", "54"]},
+                           {"doc_id": "c16qs-product-page", "sections": ["Cellular Bands Supported"]}],
+      "must_include": [["1, 3, 5, 8, 40, 41"]]
+    },
+    {
+      "id": "E08", "category": "ambiguous",
+      "question": "What supply voltage does the C16QS need?",
+      "expected_behavior": "Ask whether bare module or EVK; give module VBAT 3.1-4.5 V (3.8 V typ) and EVK input options, each cited.",
+      "expected_status": ["ambiguous"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["13", "20", "27", "28", "60"]},
+                           {"doc_id": "c16qs-evk-user-manual", "pages": ["13", "14", "16", "17", "18"]}],
+      "must_include": [["3.1"], ["4.5"], ["type-c", "5v", "adapter"]]
+    },
+    {
+      "id": "E09", "category": "ambiguous",
+      "question": "Which LTE bands does the C16QS support?",
+      "expected_behavior": "Bands depend on regional variant; ask which variant/SKU and show per-variant lists with disputed bands marked.",
+      "expected_status": ["ambiguous"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["12", "14", "54"]},
+                           {"doc_id": "c16qs-product-page", "sections": ["Cellular Bands Supported"]}],
+      "must_include": [["variant"]]
+    },
+    {
+      "id": "E10", "category": "conflict",
+      "question": "Does the C16QS-WW support LTE Band 38?",
+      "expected_behavior": "Hardware manual 5.3 lists B38 for W.W; product page WW list omits it. Same variant-level scope. Show both, do not confirm, flag for expert review.",
+      "expected_status": ["conflict"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["14", "12", "54"]},
+                           {"doc_id": "c16qs-product-page", "sections": ["Cellular Bands Supported"]}],
+      "must_include": [["38"], ["review"]],
+      "expected_flags": ["conflict"]
+    },
+    {
+      "id": "E11", "category": "unanswerable",
+      "question": "Is the C16QS certified for use with my custom-designed antenna?",
+      "expected_behavior": "Not verified; sources state FCC modular conditions only. Show related context (Sections 9.4.3/9.4.4) and escalate.",
+      "expected_status": ["not_verified"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["75", "76", "77", "78"], "as": "related"}]
+    },
+    {
+      "id": "E12", "category": "unanswerable",
+      "question": "How long will the battery last on a C16QS-based tracker?",
+      "expected_behavior": "Not verified; no duty cycle or battery capacity given and no battery-life figure exists. Point to per-mode current table as context.",
+      "expected_status": ["not_verified"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["60", "61", "16"], "as": "related"}]
+    },
+    {
+      "id": "E13", "category": "unanswerable",
+      "question": "What is the unit price of the C16QS for 10,000 pieces?",
+      "expected_behavior": "Not verified: no pricing in the sources (the product page only says 'priced highly competitively').",
+      "expected_status": ["not_verified"],
+      "expected_sources": []
+    },
+    {
+      "id": "E14", "category": "revision", "setup": "simulated_revision",
+      "question": "How long must the C16QS reset pin be held low?",
+      "expected_behavior": "After ingesting the SIMULATED 5.4 revision, answer from 5.4 (150-500 ms), label it simulated, show the 5.3 wording and the open revision-change review item.",
+      "expected_status": ["answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["31"], "revision": "5.4-SIMULATED"}],
+      "must_include": [["150-500", "150 to 500", "150–500"]],
+      "expected_flags": ["revision_change"]
+    }
+  ]
+}

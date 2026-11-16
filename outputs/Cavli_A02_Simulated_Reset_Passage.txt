@@ -1,0 +1,8 @@
+SIMULATED DEMO - NOT A CAVLI PUBLICATION
+
+C16QS Hardware Manual, simulated revision 5.4
+Page 31, section 3.4.2, Reset Control
+
+Pull the pin low for 150-500ms to reset the module.
+
+This excerpt was exported from the simulated index used for the Assignment 2 demo.

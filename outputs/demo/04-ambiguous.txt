@@ -1,0 +1,36 @@
+> python -m docintel ask "What supply voltage does the C16QS need?"
+
+Q: What supply voltage does the C16QS need?
+[AMBIGUOUS - clarify]  mode=gemini:gemini-3.1-flash-lite (per scope)  2820 ms
+  This depends on what you are powering. Bare module: The C16QS module operates with a power supply
+  range between 3.1V and 4.5V [HW-v5.3-p028-1]. The typical supply voltage is 3.8V [HW-v5.3-p027-2,
+  HW-v5.3-p028-1]. These specifications apply to the VBAT_BB pins (32, 33) and VBAT_RF pins (52, 53)
+  [HW-v5.3-p027-2]. EVK board: The Cavli C16QS EVK supports power input via USB Type-C or a +5V
+  Adapter, which can be selected using Jumper 3 (JMP 3) [EVK-v1.1-p012-1].
+  Clarify: Do you mean the bare C16QS module (VBAT) or the C16QS EVK board input?
+Citations:
+  [HW-v5.3-p027-2] Cavli C16QS LTE CAT1.bis Module Hardware Manual, rev 5.3 (current), p. 27, 3.3.1 Power Supply Design
+      https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=27
+      "3.3.1 Power Supply Design The power interface of the C16QS module is as follows: Table 3.5
+      Power pin definitions Power supply Pin No. Definition IO Description Remarks V_Min V_Typ V_Max
+      32, 33 VBAT_BB PI Module input voltage - 3.1V 3.8V 4.5V 52, 53 VBAT_RF PI Module input voltage
+      - 3.1V 3.8V 4.5V 43 USIM_VDD PO External SIM card power supply Output voltage 1.8/3 1.75/2 .95
+      1.8/3 1.85/3. 05 98 GNSS_VRTC PI GNSS RTC ..."
+  [HW-v5.3-p028-1] Cavli C16QS LTE CAT1.bis Module Hardware Manual, rev 5.3 (current), p. 28, 3.3.1 Power Supply Design
+      https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=28
+      "The C16QS module can be powered by a single power supply mode. ▪ The module has 4 channels of
+      power supply, two VBAT_BB and two VBAT_RF pins. ▪ The module power supply range is between
+      3.1V – 4.5V ▪ It is recommended to use 3.8 V/830 mA power supply. ▪ If the module's operating
+      voltage drop causes the VCC supply voltage to be too low or the supply current is
+      insufficient, the module may shut down or restart. ..."
+  [EVK-v1.1-p012-1] Cavli C16QS EVK User Manual (Connection Manual), rev 1.1 (current), p. 13, PDF page 12, 2.4 Component description
+      https://mc-technologies.com/wp-content/uploads/2024/01/Cavli-C16QS-EVK-User-Manual-ERV-1.1.pdf#page=12
+      "3. Power Key (ESP 32) This button is used to power ON ESP32. 4. Boot (ESP32) This button is
+      used to enter flashing mode in ESP32. 5. Enable (ESP32) This button is used to enable the 3.3V
+      regulator of ESP32. 6. Reset Key (C16QS) This button is used to reset the module. 7. POWER Key
+      (C16QS) This button is used to turn ON the module. 8. Jumper 3 (JMP 3) This Jumper is used to
+      switch between the voltage sources (USB ..."
+  ~ Review #6 (outdated_reference, low): Cavli C16QS EVK User Manual (Connection Manual) 1.1
+  ~ (2023-03-07) is based on an unversioned 'Hardware Manual' but the current Cavli C16QS LTE
+  ~ CAT1.bis Module Hardware Manual is 5.3 (2024-12-07). Module statements in it may be outdated.
+Retrieved: HW-v5.3-p027-2(0.9), HW-v5.3-p059-2(0.821), HW-v5.3-p028-1(0.8057), HW-v5.3-p021-1(0.7484), EVK-v1.1-p016-1(0.6705), EVK-v1.1-p015-1(0.6621), EVK-v1.1-p017-1(0.6182), EVK-v1.1-p012-1(0.5874)

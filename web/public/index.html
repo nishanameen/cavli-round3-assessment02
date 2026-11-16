@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>C16QS Documentation Intelligence</title>
+  <link rel="icon" href="/cavli-logo.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/prompt-chips.css">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/prompt-chips.js" defer></script>
+  <script src="/thinking-orb.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="chrome">
+    <header class="top">
+      <div class="brand">
+        <img class="brand-logo" src="/cavli-logo.svg" alt="Cavli Wireless" width="104" height="56">
+        <div class="brand-text">
+          <h1>C16QS Documentation Intelligence</h1>
+          <p>Cited answers from Cavli's public C16QS manuals and product page · Round 3 Assignment 2 prototype</p>
+        </div>
+      </div>
+      <div class="segmented" id="view-switch" data-view="main" role="group" aria-label="Source view">
+        <span class="thumb" aria-hidden="true"></span>
+        <button type="button" class="press" data-view="main" aria-pressed="true">Current sources</button>
+        <button type="button" class="press" data-view="sim" aria-pressed="false">Simulated revision 5.4</button>
+      </div>
+    </header>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" id="tab-btn-ask" data-tab="ask" aria-selected="true" aria-controls="tab-ask">Ask</button>
+      <button role="tab" id="tab-btn-review" data-tab="review" aria-selected="false" aria-controls="tab-review">Review queue<span id="review-count" class="count"></span></button>
+      <button role="tab" id="tab-btn-pipeline" data-tab="pipeline" aria-selected="false" aria-controls="tab-pipeline">Pipeline</button>
+      <button role="tab" id="tab-btn-sources" data-tab="sources" aria-selected="false" aria-controls="tab-sources">Sources</button>
+    </nav>
+  </div>
+  <div id="sim-banner" class="sim-banner" hidden>
+    <div>Simulated view: the hardware manual has a <strong>SIMULATED revision 5.4</strong> (reset pulse changed to 150–500 ms) that
+      supersedes the real 5.3. It is not a Cavli publication and exists only to demonstrate re-indexing and expert review.</div>
+  </div>
+
+  <main>
+    <section id="tab-ask" class="panel" role="tabpanel" aria-labelledby="tab-btn-ask">
+      <div class="ask-hero">
+        <h2>Ask the C16QS manuals</h2>
+        <p>Every answer cites the page it came from. Pick a suggestion or type your own question.</p>
+      </div>
+      <div class="vs-prompt-chips" id="ask-chips" data-focus="auto">
+        <form id="ask-form" class="vs-prompt-chips-bar">
+          <label for="question" class="sr-only">Question</label>
+          <textarea id="question" class="vs-prompt-chips-input" rows="1" maxlength="500" spellcheck="false" autocomplete="off"
+            placeholder="Ask about the C16QS module, the EVK or AT commands…"></textarea>
+          <button type="submit" id="ask-btn" class="vs-prompt-chips-send" aria-label="Ask"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+        </form>
+        <div class="vs-prompt-chips-rows">
+          <div class="vs-prompt-chips-row" data-dir="-1" aria-label="Answerable questions">
+            <button class="vs-prompt-chips-chip" data-icon="learn" data-prompt="Which pin resets the bare C16QS module, and how long must it be held low?">Reset pin and hold time</button>
+            <button class="vs-prompt-chips-chip" data-icon="code" data-prompt="What is jumper JMP 3 used for on the C16QS EVK?">EVK jumper JMP 3</button>
+            <button class="vs-prompt-chips-chip" data-icon="list" data-prompt="Which COM ports appear on the PC after the C16QS EVK has booted?">COM ports after EVK boot</button>
+            <button class="vs-prompt-chips-chip" data-icon="code" data-prompt="Which AT command restarts the C16QS?">AT command to restart</button>
+            <button class="vs-prompt-chips-chip" data-icon="chart" data-prompt="What are the VB operating conditions (minimum, typical and maximum voltage) for the C16QS?">VB operating voltages</button>
+          </div>
+          <div class="vs-prompt-chips-row" data-dir="1" data-speed=".8" aria-label="Ambiguous and conflicting questions">
+            <button class="vs-prompt-chips-chip" data-icon="idea" data-prompt="What supply voltage does the C16QS need?">Ambiguous: supply voltage</button>
+            <button class="vs-prompt-chips-chip" data-icon="idea" data-prompt="Which LTE bands does the C16QS support?">Ambiguous: LTE bands</button>
+            <button class="vs-prompt-chips-chip" data-icon="chart" data-prompt="Does the C16QS-WW support LTE Band 38?">Conflict: WW Band 38</button>
+            <button class="vs-prompt-chips-chip" data-icon="chart" data-prompt="Does the C16QS-NA support LTE Band 13?">Conflict: NA Band 13</button>
+          </div>
+          <div class="vs-prompt-chips-row" data-dir="-1" data-speed="1.15" aria-label="Questions the documents cannot answer, and the simulated revision">
+            <button class="vs-prompt-chips-chip" data-icon="mail" data-prompt="Is the C16QS certified for use with my custom-designed antenna?">Should refuse: custom antenna</button>
+            <button class="vs-prompt-chips-chip" data-icon="mail" data-prompt="How long will the battery last on a C16QS-based tracker?">Should refuse: battery life</button>
+            <button class="vs-prompt-chips-chip" data-icon="mail" data-prompt="What is the MTBF of the C16QS module?">Should refuse: MTBF</button>
+            <button class="vs-prompt-chips-chip" data-icon="plan" data-prompt="How long must the C16QS reset pin be held low?" data-view="sim">Revision 5.4 (simulated): reset pulse</button>
+          </div>
+        </div>
+      </div>
+      <div class="ask-options"><label class="check"><input type="checkbox" id="all-revisions"> Include superseded revisions (audit)</label></div>
+      <div id="result" aria-live="polite"></div>
+    </section>
+
+    <section id="tab-review" class="panel" role="tabpanel" aria-labelledby="tab-btn-review" hidden>
+      <div class="panel-head">
+        <p>Conflicts, broken cross-references and revision changes found automatically at ingest. Nothing is corrected
+          automatically; an expert resolves each item with a note, and resolutions survive re-publishing.</p>
+        <label class="check"><input type="checkbox" id="review-all"> Show resolved and auto-closed</label>
+      </div>
+      <div id="review-list"></div>
+    </section>
+
+    <section id="tab-pipeline" class="panel" role="tabpanel" aria-labelledby="tab-btn-pipeline" hidden>
+      <div class="panel-head">
+        <p>How the documents got into this system, from the latest published run. This page is read-only: re-indexing
+          runs in the controlled pipeline (ingest, then expert review, then publish), because changing the index changes
+          every answer and needs human approval.</p>
+      </div>
+      <div id="pipeline-view"></div>
+    </section>
+
+    <section id="tab-sources" class="panel" role="tabpanel" aria-labelledby="tab-btn-sources" hidden>
+      <div class="panel-head"><p>Every indexed revision with its acquisition route and SHA-256 hashes. PDFs are not
+        redistributed; links open the public copies at their original hosts.</p></div>
+      <div id="sources-list"></div>
+    </section>
+  </main>
+  <footer>
+    Public sources only. Answers are written by Gemini 3.1 Flash-Lite from retrieved passages and checked by a citation and
+    number validator; band answers come from structured claims. Human approval is required before acting on flagged items.
+  </footer>
+</body>
+</html>

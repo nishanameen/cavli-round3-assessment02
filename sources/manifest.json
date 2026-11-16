@@ -1,0 +1,111 @@
+{
+  "module": "C16QS",
+  "verified_on": "2026-11-14",
+  "notes": "Document identity (doc_id) is kept separate from revision identity (revision + file hash). Full PDFs are not bundled: the manuals carry a Cavli copyright notice, so ingest downloads them from the public URLs below or reads a copy dropped into cache/inbox.",
+  "documents": [
+    {
+      "doc_id": "c16qs-hardware-manual",
+      "code": "HW",
+      "title": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+      "publisher": "Cavli Wireless",
+      "doc_type": "hardware_manual",
+      "scope": "module",
+      "revisions": [
+        {
+          "revision": "5.3",
+          "revision_label": "External Release Version 5.3",
+          "revision_date": "2024-12-07",
+          "date_source": "Version history table, printed page 10 (\"5.3 Updated variants and Band lists 07/12/2024\", DD/MM/YYYY)",
+          "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf",
+          "host": "TME (Transfer Multisort Elektronik), electronics distributor; document store file named C16QS-WW-GNAH-DTE.pdf",
+          "format": "pdf",
+          "cache_file": "hw-v5.3.pdf",
+          "sha256": "d9a38956ec01a57f065428233ef6eb2b1fab165104a934fba92430bdfeeded7c",
+          "pages": 82,
+          "access_note": "Public URL. On 2026-11-14 TME returned a Cloudflare browser check (HTTP 403) to two scripted requests, so the file was saved through a normal browser download into cache/inbox. A from-scratch scripted download on 2026-11-15 succeeded with the same SHA-256. Ingest tries the URL first and falls back to a hash-matched file in cache/inbox."
+        }
+      ]
+    },
+    {
+      "doc_id": "c16qs-evk-user-manual",
+      "code": "EVK",
+      "title": "Cavli C16QS EVK User Manual (Connection Manual)",
+      "publisher": "Cavli Wireless",
+      "doc_type": "evk_user_manual",
+      "scope": "evk",
+      "revisions": [
+        {
+          "revision": "1.1",
+          "revision_label": "External Release Version 1.1",
+          "revision_date": "2023-03-07",
+          "date_source": "Version history table, printed page 6 (\"1.1 Added Setup Guide 07-03-2023\"); PDF creation date 2023-03-08 is consistent",
+          "url": "https://mc-technologies.com/wp-content/uploads/2024/01/Cavli-C16QS-EVK-User-Manual-ERV-1.1.pdf",
+          "host": "MC Technologies GmbH, electronics distributor website",
+          "format": "pdf",
+          "cache_file": "evk-v1.1.pdf",
+          "sha256": "26be23192343416fa538bc3bc99f7cd734986668aed9e7f5ec3b79421f84c688",
+          "pages": 20,
+          "access_note": "Direct download works (HTTP 200, application/pdf). Printed page labels are PDF page index + 1."
+        }
+      ]
+    },
+    {
+      "doc_id": "c16qs-at-command-manual",
+      "code": "AT",
+      "title": "Cavli C16QS LTE Cat 1.bis AT Command Manual",
+      "publisher": "Cavli Wireless",
+      "doc_type": "at_command_manual",
+      "scope": "module",
+      "revisions": [
+        {
+          "revision": "3.1",
+          "revision_label": "External Release Version 3.1",
+          "revision_date": "2024-09-10",
+          "date_source": "Version history table, printed page 13 (\"3.1 Added SIM Toolkit Commands 10-Sep-2024\")",
+          "url": "https://itbrainpower.net/downloadables/C16QS_AT_Command_Manual_ERV_3_1.pdf",
+          "host": "itbrainpower.net, third-party C16QS board vendor download area",
+          "format": "pdf",
+          "cache_file": "at-v3.1.pdf",
+          "sha256": "de1e90023b8324ad0a915708f212496a10a0a9b441de97205381c94f9e82381d",
+          "pages": 245,
+          "access_note": "Direct download works (HTTP 200, application/pdf). Third-party host; identity checked from cover page and version history."
+        }
+      ]
+    },
+    {
+      "doc_id": "c16qs-product-page",
+      "code": "WEB",
+      "title": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+      "publisher": "Cavli Wireless",
+      "doc_type": "product_page",
+      "scope": "product",
+      "revisions": [
+        {
+          "revision": null,
+          "revision_label": "Live web page (no published revision); identified by retrieval date and text hash",
+          "revision_date": null,
+          "date_source": "No revision or publication date is stated on the page",
+          "url": "https://www.cavliwireless.com/iot-modules/c-series/c16qs",
+          "host": "cavliwireless.com (official)",
+          "format": "html",
+          "cache_file": "product.html",
+          "sha256": null,
+          "access_note": "Fetched live at ingest. Because the page has no revision, a change in its extracted-text hash creates a new dated snapshot revision and supersedes the previous one."
+        }
+      ]
+    }
+  ],
+  "candidates_not_ingested": [
+    {
+      "title": "C16QS Hardware Manual, External Release Version 5.1",
+      "url": "https://device.report/m/f475fa5dfaccfd37db091a4b84f4298f717b7acfb5f355a130d38dddc5372b7a.pdf",
+      "mirror": "https://manuals.plus/m/f475fa5dfaccfd37db091a4b84f4298f717b7acfb5f355a130d38dddc5372b7a_optim.pdf",
+      "status": "Not retrievable on 2026-11-14: device.report timed out on connect (30 s and 300 s attempts); the manuals.plus mirror shows a Cloudflare security check. Not bypassed. The revision demo uses a labelled simulated revision instead. If a copy is placed in cache/inbox, add it here as revision 5.1 and re-run ingest."
+    },
+    {
+      "title": "C16QS Mini PCIe Card Hardware Manual, External Release Version 1.6",
+      "url": "https://www.codico.com/de/mpattachment/file/download/id/1468/",
+      "status": "Out of scope: different form factor (mPCIe card) from the LGA module chosen for this prototype."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+> python -m docintel --db cache/demo-revision.sqlite simulate-revision
+Applying SIMULATED revision c16qs-hardware-manual-5.4-SIMULATED.json
+  HW   5.4-SIMULATED                new       (SIMULATED)
+  revision: c16qs-hardware-manual revision 5.4-SIMULATED supersedes 5.3: 2 changed page(s)/section(s); numeric values changed: yes.
+
+
+> python -m docintel --db cache/demo-revision.sqlite ask "How long must the C16QS reset pin be held low?"
+
+Q: How long must the C16QS reset pin be held low?
+[ANSWERED - see review flags]  mode=gemini:gemini-3.1-flash-lite  1460 ms
+  To reset the C16QS module, the reset pin (Pin 17) must be pulled low for 150-500ms. This
+  information is provided in a simulated revision of the hardware manual.
+  ! Cites a SIMULATED revision - not a Cavli publication.
+  ! Passage changed in 5.4-SIMULATED vs 5.3 (p. 31): was “software does not respond, the module can be reset. Pull the pin low for 100-500ms to reset the module. The” (review #7).
+Citations:
+  [HW-v5.4-SIMULATED-p031-2] Cavli C16QS LTE CAT1.bis Module Hardware Manual, rev 5.4-SIMULATED [SIMULATED] (current), p. 31, 3.4.2 Reset Control
+      simulated:sources/simulated/c16qs-hardware-manual-5.4-SIMULATED.json#page=31
+      "3.4.2 Reset Control The C16QS module Pin 17th is a reset pin. The application detects that
+      the module is abnormal. When the software does not respond, the module can be reset. Pull the
+      pin low for 150-500ms to reset the module. The RESET pin is sensitive to interference. A 10nF
+      to 0.1uF capacitor can be installed near the signal for signal filtering. Keep away from RF
+      interference signals when routing. Figure 6 ..."
+  ~ Review #5 (cross_reference_gap, medium): AT+TRB is referenced in Cavli C16QS LTE CAT1.bis Module
+  ~ Hardware Manual (rev 5.4-SIMULATED, page 31) but is not documented in the current AT Command
+  ~ Manual.
+  ~ Review #7 (revision_change, high): c16qs-hardware-manual revision 5.4-SIMULATED supersedes 5.3:
+  ~ 2 changed page(s)/section(s); numeric values changed: yes.
+Retrieved: HW-v5.4-SIMULATED-p031-2(1.05), HW-v5.4-SIMULATED-p021-1(0.7325), HW-v5.4-SIMULATED-p022-1(0.7222), HW-v5.4-SIMULATED-p030-3(0.6743), HW-v5.4-SIMULATED-p024-1(0.6174), HW-v5.4-SIMULATED-p028-1(0.6128)

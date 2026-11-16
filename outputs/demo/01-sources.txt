@@ -1,0 +1,9 @@
+> python -m docintel sources
+AT   rev 3.1                          current    date=2024-09-10  pages=245  passages=462  via=cache (hash verified)
+     Cavli C16QS LTE Cat 1.bis AT Command Manual (at_command_manual)  https://itbrainpower.net/downloadables/C16QS_AT_Command_Manual_ERV_3_1.pdf
+EVK  rev 1.1                          current    date=2023-03-07  pages=20   passages=28   via=cache (hash verified)
+     Cavli C16QS EVK User Manual (Connection Manual) (evk_user_manual)  https://mc-technologies.com/wp-content/uploads/2024/01/Cavli-C16QS-EVK-User-Manual-ERV-1.1.pdf
+HW   rev 5.3                          current    date=2024-12-07  pages=82   passages=139  via=cache (hash verified)
+     Cavli C16QS LTE CAT1.bis Module Hardware Manual (hardware_manual)  https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf
+WEB  rev snapshot-20261114-c81b8bc8   current    date=not stated  pages=-    passages=30   via=cache
+     Cavli C16QS LTE Cat 1bis IoT Module product page (product_page)  https://www.cavliwireless.com/iot-modules/c-series/c16qs

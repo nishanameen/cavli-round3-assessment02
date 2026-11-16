@@ -1,0 +1,126 @@
+{
+  "expected_passage_similarity": {
+    "min": 0.8608,
+    "median": 0.9001,
+    "max": 0.9469
+  },
+  "unanswerable_top_similarity": [
+    {
+      "id": "E11",
+      "top_similarity": 0.8867
+    },
+    {
+      "id": "E12",
+      "top_similarity": 0.8468
+    },
+    {
+      "id": "E13",
+      "top_similarity": 0.8533
+    },
+    {
+      "id": "H09",
+      "top_similarity": 0.9008
+    },
+    {
+      "id": "H10",
+      "top_similarity": 0.8821
+    }
+  ],
+  "per_case": [
+    {
+      "id": "E01",
+      "best_expected": 0.9469,
+      "best_other": 0.893
+    },
+    {
+      "id": "E02",
+      "best_expected": 0.916,
+      "best_other": 0.9023
+    },
+    {
+      "id": "E03",
+      "best_expected": 0.8978,
+      "best_other": 0.8785
+    },
+    {
+      "id": "E04",
+      "best_expected": 0.8874,
+      "best_other": 0.8947
+    },
+    {
+      "id": "E05",
+      "best_expected": 0.871,
+      "best_other": 0.8844
+    },
+    {
+      "id": "E06",
+      "best_expected": 0.9155,
+      "best_other": 0.9196
+    },
+    {
+      "id": "E07",
+      "best_expected": 0.9073,
+      "best_other": 0.9095
+    },
+    {
+      "id": "E08",
+      "best_expected": 0.9264,
+      "best_other": 0.9009
+    },
+    {
+      "id": "E09",
+      "best_expected": 0.9217,
+      "best_other": 0.9288
+    },
+    {
+      "id": "E10",
+      "best_expected": 0.8806,
+      "best_other": 0.8901
+    },
+    {
+      "id": "E14",
+      "best_expected": 0.9246,
+      "best_other": 0.8768
+    },
+    {
+      "id": "H01",
+      "best_expected": 0.9001,
+      "best_other": 0.8973
+    },
+    {
+      "id": "H02",
+      "best_expected": 0.9021,
+      "best_other": 0.9008
+    },
+    {
+      "id": "H03",
+      "best_expected": 0.8752,
+      "best_other": 0.8873
+    },
+    {
+      "id": "H04",
+      "best_expected": 0.8608,
+      "best_other": 0.866
+    },
+    {
+      "id": "H05",
+      "best_expected": 0.8965,
+      "best_other": 0.878
+    },
+    {
+      "id": "H06",
+      "best_expected": 0.8772,
+      "best_other": 0.8693
+    },
+    {
+      "id": "H07",
+      "best_expected": 0.9324,
+      "best_other": 0.8879
+    },
+    {
+      "id": "H08",
+      "best_expected": 0.887,
+      "best_other": 0.8975
+    }
+  ]
+}

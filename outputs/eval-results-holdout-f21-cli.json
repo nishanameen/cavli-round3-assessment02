@@ -1,0 +1,1592 @@
+{
+  "summary": {
+    "run_at": "2026-11-16T11:22:21+00:00",
+    "mode": "gemini + validator (extractive fallback)",
+    "case_file": "eval/holdout.json",
+    "cases": 10,
+    "passed": 10,
+    "citations_checked": 17,
+    "citations_valid": 17,
+    "by_category": {
+      "answerable": {
+        "cases": 5,
+        "passed": 5
+      },
+      "ambiguous": {
+        "cases": 2,
+        "passed": 2
+      },
+      "conflict": {
+        "cases": 1,
+        "passed": 1
+      },
+      "unanswerable": {
+        "cases": 2,
+        "passed": 2
+      }
+    }
+  },
+  "records": [
+    {
+      "case": {
+        "id": "H01",
+        "category": "answerable",
+        "question": "What is the default UART baud rate of the C16QS?",
+        "expected_behavior": "115200 bps (Table 2.1 or UART1 section).",
+        "expected_status": [
+          "answered",
+          "answered_with_flags"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-hardware-manual",
+            "pages": [
+              "13",
+              "34",
+              "35"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "115200"
+          ]
+        ]
+      },
+      "result": {
+        "question": "What is the default UART baud rate of the C16QS?",
+        "query": {
+          "keywords": [
+            "default",
+            "uart",
+            "baud",
+            "rate"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": null,
+          "bands": []
+        },
+        "status": "answered",
+        "answer": "The default baud rate for the Cavli C16QS module's serial port is 115200bps [HW-v5.3-p034-2, HW-v5.3-p035-2, HW-v5.3-p013-1].",
+        "clarification": null,
+        "citations": [
+          {
+            "pid": "HW-v5.3-p034-2",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 34",
+            "section": "3.6.2 UART1 Serial Port",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=34",
+            "quote": "3.6.2 UART1 Serial Port The serial port can realize AT interactive instructions, print program log information, and interact with peripheral data and firmware update. The module's serial port baud rate can be set to 600,1200,2400,4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800,921600,1152000, 3000000 bps. The default baud rate is 115200 bps and maximum baud rate is 3000000 bps The UART interface is defined ..."
+          },
+          {
+            "pid": "HW-v5.3-p035-2",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 35",
+            "section": "3.6.4 Serial Port Application Circuit",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=35",
+            "quote": "3.6.4 Serial Port Application Circuit ➢ The serial level is 1.8V. ➢ The module's serial port baud rate can be set to 600 to 3000000bps baud rate and the default is 115200bps. ➢ The UART1 serial port can realize ✓ AT interactive instructions ✓ Print program log information ✓ Interact with peripheral data Pin No. Signal name I/O Description Voltage V_min V_Typical V_max 22 UART2_RXD DI UART 2 Data transmission 1.75 ..."
+          },
+          {
+            "pid": "HW-v5.3-p013-1",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 13",
+            "section": "2.2 Module Characteristics",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=13",
+            "quote": "2.2 Module Characteristics Table 2.1 Key Features Characteristics Description Physical Characteristics 26.5mm x 22.5mm x 2.3mm Fixed Way LGA package, patch mount Operating Voltage 3.1V – 4.5V Typical Voltage 3.8 V Application Processor ARM Cortex M3 with a clock frequency of 204MHz. Application Interface USIM card Supports 3.0V/1.8V Supports hot swap function USB ✓ USB2.0 (High-Speed) (only supports Slave mode) ✓ ..."
+          }
+        ],
+        "related_context": [],
+        "review_flags": [],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "HW-v5.3-p035-2",
+            "score": 0.9,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "35",
+            "section": "Serial Port Application Circuit"
+          },
+          {
+            "pid": "HW-v5.3-p034-2",
+            "score": 0.892,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "34",
+            "section": "UART1 Serial Port"
+          },
+          {
+            "pid": "HW-v5.3-p013-1",
+            "score": 0.7645,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "13",
+            "section": "Module Characteristics"
+          },
+          {
+            "pid": "AT-v3.1-p194-1",
+            "score": 0.4543,
+            "coverage": 0.5,
+            "document": "Cavli C16QS LTE Cat 1.bis AT Command Manual",
+            "revision": "3.1",
+            "page": "194",
+            "section": "AT$QCIPR"
+          },
+          {
+            "pid": "AT-v3.1-p026-1",
+            "score": 0.4461,
+            "coverage": 0.5,
+            "document": "Cavli C16QS LTE Cat 1.bis AT Command Manual",
+            "revision": "3.1",
+            "page": "26",
+            "section": "AT+CBST"
+          },
+          {
+            "pid": "AT-v3.1-p185-1",
+            "score": 0.4374,
+            "coverage": 0.75,
+            "document": "Cavli C16QS LTE Cat 1.bis AT Command Manual",
+            "revision": "3.1",
+            "page": "185",
+            "section": "AT$QCPCFG"
+          }
+        ],
+        "mode": "gemini:gemini-3.1-flash-lite",
+        "validation": {
+          "citations_in_retrieved_set": true,
+          "unknown_citations": [],
+          "numbers_supported": true,
+          "unsupported_numbers": [],
+          "passed": true
+        },
+        "note": null,
+        "usage": {
+          "input_tokens": 2196,
+          "output_tokens": 128
+        },
+        "elapsed_ms": 1908
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "HW-v5.3-p034-2",
+            "valid": true,
+            "reason": "quote found on PDF page 34 (printed 34)"
+          },
+          {
+            "pid": "HW-v5.3-p035-2",
+            "valid": true,
+            "reason": "quote found on PDF page 35 (printed 35)"
+          },
+          {
+            "pid": "HW-v5.3-p013-1",
+            "valid": true,
+            "reason": "quote found on PDF page 13 (printed 13)"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H02",
+        "category": "answerable",
+        "question": "How long must POWER_KEY be held low to turn on the C16QS?",
+        "expected_behavior": "At least 500 ms (Section 3.4.1).",
+        "expected_status": [
+          "answered",
+          "answered_with_flags"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-hardware-manual",
+            "pages": [
+              "30"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "500"
+          ]
+        ]
+      },
+      "result": {
+        "question": "How long must POWER_KEY be held low to turn on the C16QS?",
+        "query": {
+          "keywords": [
+            "power",
+            "key",
+            "low",
+            "turn"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": null,
+          "bands": []
+        },
+        "status": "answered",
+        "answer": "To turn on the C16QS module, the POWER_KEY must be pulled down to a low level for at least 500ms.",
+        "clarification": null,
+        "citations": [
+          {
+            "pid": "HW-v5.3-p030-3",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 30",
+            "section": "3.4.1 Turn ON Module",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=30",
+            "quote": "3.4.1 Turn ON Module The 15th pin of the C16QS module is Power on pin. The module can be powered on by pulling down the POWER_KEY Low for at least 500ms. The user can check whether the module is powered on by querying the high and low levels of the VDD_EXT pin. Table 3.7 Switch pin definition Figure 5 Power-on reference circuit Pin No. Signal name I/O Description Voltage V_min V_Typical V_max 29 VDD_EXT PO 1.8V ..."
+          }
+        ],
+        "related_context": [],
+        "review_flags": [],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "HW-v5.3-p030-3",
+            "score": 0.9,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "30",
+            "section": "Turn ON Module"
+          },
+          {
+            "pid": "EVK-v1.1-p012-1",
+            "score": 0.7891,
+            "coverage": 1.0,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "13",
+            "section": "Component description"
+          },
+          {
+            "pid": "EVK-v1.1-p017-1",
+            "score": 0.5604,
+            "coverage": 0.5,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "18",
+            "section": "Setup Guide"
+          },
+          {
+            "pid": "HW-v5.3-p028-1",
+            "score": 0.541,
+            "coverage": 0.5,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "28",
+            "section": "Power Supply Design"
+          },
+          {
+            "pid": "EVK-v1.1-p018-1",
+            "score": 0.5118,
+            "coverage": 0.5,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "19",
+            "section": "Setup Guide"
+          },
+          {
+            "pid": "HW-v5.3-p059-2",
+            "score": 0.4784,
+            "coverage": 0.5,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "59",
+            "section": "Module IO Level"
+          }
+        ],
+        "mode": "gemini:gemini-3.1-flash-lite",
+        "validation": {
+          "citations_in_retrieved_set": true,
+          "unknown_citations": [],
+          "numbers_supported": true,
+          "unsupported_numbers": [],
+          "passed": true
+        },
+        "note": null,
+        "usage": {
+          "input_tokens": 1769,
+          "output_tokens": 59
+        },
+        "elapsed_ms": 2323
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "HW-v5.3-p030-3",
+            "valid": true,
+            "reason": "quote found on PDF page 30 (printed 30)"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H03",
+        "category": "answerable",
+        "question": "What type of SIM card socket does the C16QS EVK use?",
+        "expected_behavior": "Micro SIM card socket (EVK component 11).",
+        "expected_status": [
+          "answered",
+          "answered_with_flags"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-evk-user-manual",
+            "pages": [
+              "13"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "micro"
+          ]
+        ]
+      },
+      "result": {
+        "question": "What type of SIM card socket does the C16QS EVK use?",
+        "query": {
+          "keywords": [
+            "sim",
+            "card",
+            "socket",
+            "evk"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": "evk",
+          "bands": []
+        },
+        "status": "answered",
+        "answer": "The SIM card socket type used in the C16QS EVK is a micro sim card socket.",
+        "clarification": null,
+        "citations": [
+          {
+            "pid": "EVK-v1.1-p012-1",
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 13, PDF page 12",
+            "section": "2.4 Component description",
+            "url": "https://mc-technologies.com/wp-content/uploads/2024/01/Cavli-C16QS-EVK-User-Manual-ERV-1.1.pdf#page=12",
+            "quote": "3. Power Key (ESP 32) This button is used to power ON ESP32. 4. Boot (ESP32) This button is used to enter flashing mode in ESP32. 5. Enable (ESP32) This button is used to enable the 3.3V regulator of ESP32. 6. Reset Key (C16QS) This button is used to reset the module. 7. POWER Key (C16QS) This button is used to turn ON the module. 8. Jumper 3 (JMP 3) This Jumper is used to switch between the voltage sources (USB ..."
+          }
+        ],
+        "related_context": [],
+        "review_flags": [
+          {
+            "review_id": 6,
+            "kind": "outdated_reference",
+            "severity": "low",
+            "topic": "stale:c16qs-evk-user-manual",
+            "summary": "Cavli C16QS EVK User Manual (Connection Manual) 1.1 (2023-03-07) is based on an unversioned 'Hardware Manual' but the current Cavli C16QS LTE CAT1.bis Module Hardware Manual is 5.3 (2024-12-07). Module statements in it may be outdated."
+          }
+        ],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "EVK-v1.1-p012-1",
+            "score": 1.05,
+            "coverage": 1.0,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "13",
+            "section": "Component description"
+          },
+          {
+            "pid": "EVK-v1.1-p007-3",
+            "score": 0.533,
+            "coverage": 0.25,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "8",
+            "section": "EVK Layout"
+          },
+          {
+            "pid": "EVK-v1.1-p014-1",
+            "score": 0.4852,
+            "coverage": 0.25,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "15",
+            "section": "Setup Guide"
+          },
+          {
+            "pid": "EVK-v1.1-p011-1",
+            "score": 0.4737,
+            "coverage": 0.25,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "12",
+            "section": "Component description"
+          },
+          {
+            "pid": "EVK-v1.1-p006-2",
+            "score": 0.4598,
+            "coverage": 0.25,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "7",
+            "section": "Overview"
+          },
+          {
+            "pid": "EVK-v1.1-p007-2",
+            "score": 0.4575,
+            "coverage": 0.25,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "8",
+            "section": "Chapter Overview"
+          }
+        ],
+        "mode": "gemini:gemini-3.1-flash-lite",
+        "validation": {
+          "citations_in_retrieved_set": true,
+          "unknown_citations": [],
+          "numbers_supported": true,
+          "unsupported_numbers": [],
+          "passed": true
+        },
+        "note": null,
+        "usage": {
+          "input_tokens": 1158,
+          "output_tokens": 50
+        },
+        "elapsed_ms": 2352
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "EVK-v1.1-p012-1",
+            "valid": true,
+            "reason": "quote found on PDF page 12 (printed 13)"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H04",
+        "category": "answerable",
+        "question": "What is the C16QS current consumption in Hibernate mode?",
+        "expected_behavior": "11 µA (Table 5.5).",
+        "expected_status": [
+          "answered",
+          "answered_with_flags"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-hardware-manual",
+            "pages": [
+              "61"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "11"
+          ]
+        ]
+      },
+      "result": {
+        "question": "What is the C16QS current consumption in Hibernate mode?",
+        "query": {
+          "keywords": [
+            "current",
+            "consumption",
+            "hibernate",
+            "mode"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": null,
+          "bands": []
+        },
+        "status": "answered",
+        "answer": "The current consumption of the Cavli C16QS module in Hibernate mode is 11 µA [HW-v5.3-p061-1].",
+        "clarification": null,
+        "citations": [
+          {
+            "pid": "HW-v5.3-p061-1",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 61",
+            "section": "5.6 Power Consumption Characteristics",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=61",
+            "quote": "Band 19 16 -98 34.2 4.7 453 mA Band 20 15 -96 33.9 4.6 460 mA Band 25 13 -96 34.2 4.7 486 mA Band 26 16 -97 34.1 4.7 457 mA Band 28 15 -97 33.9 4.6 410 mA Band 40 14 -98 34.2 4.6 210 mA Band 41 13 -98 34.1 4.7 299 mA Band 66 13 -98 34 4.9 532 mA GNSS Powering 50 mA Tracking 60 mA Fix 60 mA GNSS off & CFUN=0 4 mA Sleep 1 56 µA Sleep 2 25 µA Hibernate 11 µA Shutdown 1 µA Module Peak 650.88 mA"
+          }
+        ],
+        "related_context": [],
+        "review_flags": [],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "HW-v5.3-p060-2",
+            "score": 0.7875,
+            "coverage": 0.75,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "60",
+            "section": "Power Consumption Characteristics"
+          },
+          {
+            "pid": "HW-v5.3-p061-1",
+            "score": 0.7804,
+            "coverage": 0.75,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "61",
+            "section": "Power Consumption Characteristics"
+          },
+          {
+            "pid": "HW-v5.3-p016-1",
+            "score": 0.5458,
+            "coverage": 0.5,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "16",
+            "section": "Module Working Mode"
+          },
+          {
+            "pid": "HW-v5.3-p041-1",
+            "score": 0.513,
+            "coverage": 0.75,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "41",
+            "section": "Network Status"
+          },
+          {
+            "pid": "HW-v5.3-p041-2",
+            "score": 0.4721,
+            "coverage": 0.75,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "41",
+            "section": "Module Status Indication"
+          },
+          {
+            "pid": "HW-v5.3-p028-1",
+            "score": 0.4612,
+            "coverage": 0.75,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "28",
+            "section": "Power Supply Design"
+          }
+        ],
+        "mode": "gemini:gemini-3.1-flash-lite",
+        "validation": {
+          "citations_in_retrieved_set": true,
+          "unknown_citations": [],
+          "numbers_supported": true,
+          "unsupported_numbers": [],
+          "passed": true
+        },
+        "note": null,
+        "usage": {
+          "input_tokens": 1930,
+          "output_tokens": 65
+        },
+        "elapsed_ms": 1916
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "HW-v5.3-p061-1",
+            "valid": true,
+            "reason": "quote found on PDF page 61 (printed 61)"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H05",
+        "category": "answerable",
+        "question": "Which command enables internet access through RNDIS on the C16QS EVK?",
+        "expected_behavior": "AT$QCNETDEVCTL=3,1 via the AT port (EVK p. 21); AT manual 16.36 documents the command.",
+        "expected_status": [
+          "answered",
+          "answered_with_flags"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-evk-user-manual",
+            "pages": [
+              "21"
+            ]
+          },
+          {
+            "doc_id": "c16qs-at-command-manual",
+            "pages": [
+              "197",
+              "198"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "QCNETDEVCTL"
+          ]
+        ]
+      },
+      "result": {
+        "question": "Which command enables internet access through RNDIS on the C16QS EVK?",
+        "query": {
+          "keywords": [
+            "command",
+            "enables",
+            "internet",
+            "access",
+            "through",
+            "rndis",
+            "evk"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": "evk",
+          "bands": []
+        },
+        "status": "answered",
+        "answer": "To access the internet through RNDIS on the C16QS EVK, the command AT$QCNETDEVCTL=3,1 must be issued to the module via the AT Port. This step does not need to be repeated once completed.",
+        "clarification": null,
+        "citations": [
+          {
+            "pid": "EVK-v1.1-p020-1",
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 21, PDF page 20",
+            "section": "3 Setup Guide",
+            "url": "https://mc-technologies.com/wp-content/uploads/2024/01/Cavli-C16QS-EVK-User-Manual-ERV-1.1.pdf#page=20",
+            "quote": "10. If RNDIS is enabled through the AT port, it will be listed under ‘Network Adapters’ in ‘Device Manager’ in Windows PC. Figure 14 RNDIS NOTE • To access the COM/ttyUSB ports via the Type-C USB interface, the module must be fully booted up. Else the COM/ttyUSB ports would not be initialized. • To access internet through RNDIS, the command AT$QCNETDEVCTL=3,1 has to be given to the module via the AT Port. Once done, ..."
+          }
+        ],
+        "related_context": [],
+        "review_flags": [
+          {
+            "review_id": 6,
+            "kind": "outdated_reference",
+            "severity": "low",
+            "topic": "stale:c16qs-evk-user-manual",
+            "summary": "Cavli C16QS EVK User Manual (Connection Manual) 1.1 (2023-03-07) is based on an unversioned 'Hardware Manual' but the current Cavli C16QS LTE CAT1.bis Module Hardware Manual is 5.3 (2024-12-07). Module statements in it may be outdated."
+          }
+        ],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "EVK-v1.1-p020-1",
+            "score": 0.9857,
+            "coverage": 0.857,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "21",
+            "section": "Setup Guide"
+          },
+          {
+            "pid": "EVK-v1.1-p012-1",
+            "score": 0.4408,
+            "coverage": 0.429,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "13",
+            "section": "Component description"
+          },
+          {
+            "pid": "EVK-v1.1-p007-3",
+            "score": 0.4323,
+            "coverage": 0.286,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "8",
+            "section": "EVK Layout"
+          },
+          {
+            "pid": "EVK-v1.1-p011-1",
+            "score": 0.3986,
+            "coverage": 0.286,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "12",
+            "section": "Component description"
+          },
+          {
+            "pid": "EVK-v1.1-p006-2",
+            "score": 0.3908,
+            "coverage": 0.286,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "7",
+            "section": "Overview"
+          },
+          {
+            "pid": "EVK-v1.1-p007-2",
+            "score": 0.3894,
+            "coverage": 0.286,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "8",
+            "section": "Chapter Overview"
+          }
+        ],
+        "mode": "gemini:gemini-3.1-flash-lite",
+        "validation": {
+          "citations_in_retrieved_set": true,
+          "unknown_citations": [],
+          "numbers_supported": true,
+          "unsupported_numbers": [],
+          "passed": true
+        },
+        "note": null,
+        "usage": {
+          "input_tokens": 1265,
+          "output_tokens": 81
+        },
+        "elapsed_ms": 2026
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "EVK-v1.1-p020-1",
+            "valid": true,
+            "reason": "quote found on PDF page 20 (printed 21)"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H06",
+        "category": "ambiguous",
+        "question": "What is the maximum input voltage?",
+        "expected_behavior": "Scope unclear: bare module VBAT max 4.5 V vs EVK 5 V input; ask which.",
+        "expected_status": [
+          "ambiguous"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-hardware-manual",
+            "pages": [
+              "13",
+              "20",
+              "27",
+              "28",
+              "60"
+            ]
+          },
+          {
+            "doc_id": "c16qs-evk-user-manual",
+            "pages": [
+              "11",
+              "13",
+              "14",
+              "16",
+              "17",
+              "18"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "4.5"
+          ]
+        ]
+      },
+      "result": {
+        "question": "What is the maximum input voltage?",
+        "query": {
+          "keywords": [
+            "maximum",
+            "input",
+            "voltage"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": null,
+          "bands": []
+        },
+        "status": "ambiguous",
+        "answer": "This depends on what you are powering. Bare module: “5.4 Module IO Level: VBAT power supply ±4 ±8 KV Parameter Description Minimum Maximum VIH High level input” [HW-v5.3-p059-2] “3.3.1 Power Supply Design: Pin No. Definition IO Description Remarks V_Min V_Typ V_Max 32, 33 VBAT_BB PI Module input voltage - 3.1V 3.8V 4.5V 52, 53 VBAT_RF PI Module input” [HW-v5.3-p027-2] EVK board: “3 Setup Guide: 4. Place the Power Input Jumper (JMP 3) according to the input power supply. Figure 6 Jumper 3 Pinout Figure 7 Placing Jumper according to Power Source” [EVK-v1.1-p016-1] “3 Setup Guide: Figure 4 Interfacing Antenna 3. Connect the needed power supply input (We have used Type-C). Figure 5 Supplying power” [EVK-v1.1-p015-1]",
+        "clarification": "Do you mean the bare C16QS module (VBAT) or the C16QS EVK board input?",
+        "citations": [
+          {
+            "pid": "HW-v5.3-p059-2",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 59",
+            "section": "5.4 Module IO Level",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=59",
+            "quote": "5.4 Module IO Level The C16QS module IO levels are as follows: Table 5.3 Electrical Characteristics of C16QS module Test port Contact discharge Air discharge Unit USB interface ±4 ±8 KV USIM interface ±4 ±8 KV VBAT power supply ±4 ±8 KV Parameter Description Minimum Maximum VIH High level input voltage 0.65* VDD_EXT VDD_EXT+0.3V VIL Low level input voltage - 0.35*VDD_EXT VOH High level output voltage VDD_EXT-0.45V ..."
+          },
+          {
+            "pid": "HW-v5.3-p027-2",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 27",
+            "section": "3.3.1 Power Supply Design",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=27",
+            "quote": "3.3.1 Power Supply Design The power interface of the C16QS module is as follows: Table 3.5 Power pin definitions Power supply Pin No. Definition IO Description Remarks V_Min V_Typ V_Max 32, 33 VBAT_BB PI Module input voltage - 3.1V 3.8V 4.5V 52, 53 VBAT_RF PI Module input voltage - 3.1V 3.8V 4.5V 43 USIM_VDD PO External SIM card power supply Output voltage 1.8/3 1.75/2 .95 1.8/3 1.85/3. 05 98 GNSS_VRTC PI GNSS RTC ..."
+          },
+          {
+            "pid": "EVK-v1.1-p016-1",
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 17, PDF page 16",
+            "section": "3 Setup Guide",
+            "url": "https://mc-technologies.com/wp-content/uploads/2024/01/Cavli-C16QS-EVK-User-Manual-ERV-1.1.pdf#page=16",
+            "quote": "4. Place the Power Input Jumper (JMP 3) according to the input power supply. Figure 6 Jumper 3 Pinout Figure 7 Placing Jumper according to Power Source"
+          },
+          {
+            "pid": "EVK-v1.1-p015-1",
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 16, PDF page 15",
+            "section": "3 Setup Guide",
+            "url": "https://mc-technologies.com/wp-content/uploads/2024/01/Cavli-C16QS-EVK-User-Manual-ERV-1.1.pdf#page=15",
+            "quote": "2. Connect the needed Antenna(s) to the corresponding SMA Connectors (For LTE and GNSS Antennas). Figure 4 Interfacing Antenna 3. Connect the needed power supply input (We have used Type-C). Figure 5 Supplying power"
+          }
+        ],
+        "related_context": [],
+        "review_flags": [
+          {
+            "review_id": 6,
+            "kind": "outdated_reference",
+            "severity": "low",
+            "topic": "stale:c16qs-evk-user-manual",
+            "summary": "Cavli C16QS EVK User Manual (Connection Manual) 1.1 (2023-03-07) is based on an unversioned 'Hardware Manual' but the current Cavli C16QS LTE CAT1.bis Module Hardware Manual is 5.3 (2024-12-07). Module statements in it may be outdated."
+          }
+        ],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "HW-v5.3-p059-2",
+            "score": 0.8911,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "59",
+            "section": "Module IO Level"
+          },
+          {
+            "pid": "HW-v5.3-p027-2",
+            "score": 0.7502,
+            "coverage": 0.667,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "27",
+            "section": "Power Supply Design"
+          },
+          {
+            "pid": "HW-v5.3-p060-2",
+            "score": 0.613,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "60",
+            "section": "Power Consumption Characteristics"
+          },
+          {
+            "pid": "HW-v5.3-p021-1",
+            "score": 0.5986,
+            "coverage": 0.667,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "21",
+            "section": "Digital I/O characteristics"
+          },
+          {
+            "pid": "EVK-v1.1-p016-1",
+            "score": 0.5206,
+            "coverage": 0.667,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "17",
+            "section": "Setup Guide"
+          },
+          {
+            "pid": "EVK-v1.1-p015-1",
+            "score": 0.5123,
+            "coverage": 0.667,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "16",
+            "section": "Setup Guide"
+          },
+          {
+            "pid": "EVK-v1.1-p017-1",
+            "score": 0.4684,
+            "coverage": 0.667,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "18",
+            "section": "Setup Guide"
+          },
+          {
+            "pid": "EVK-v1.1-p012-1",
+            "score": 0.4376,
+            "coverage": 0.667,
+            "document": "Cavli C16QS EVK User Manual (Connection Manual)",
+            "revision": "1.1",
+            "page": "13",
+            "section": "Component description"
+          }
+        ],
+        "mode": "extractive (per scope)",
+        "validation": {
+          "module": {
+            "citations_in_retrieved_set": true,
+            "unknown_citations": [],
+            "numbers_supported": true,
+            "unsupported_numbers": [],
+            "passed": true
+          },
+          "evk": {
+            "citations_in_retrieved_set": true,
+            "unknown_citations": [],
+            "numbers_supported": true,
+            "unsupported_numbers": [],
+            "passed": true
+          }
+        },
+        "note": null,
+        "usage": null,
+        "elapsed_ms": 15658619
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "HW-v5.3-p059-2",
+            "valid": true,
+            "reason": "quote found on PDF page 59 (printed 59)"
+          },
+          {
+            "pid": "HW-v5.3-p027-2",
+            "valid": true,
+            "reason": "quote found on PDF page 27 (printed 27)"
+          },
+          {
+            "pid": "EVK-v1.1-p016-1",
+            "valid": true,
+            "reason": "quote found on PDF page 16 (printed 17)"
+          },
+          {
+            "pid": "EVK-v1.1-p015-1",
+            "valid": true,
+            "reason": "quote found on PDF page 15 (printed 16)"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H07",
+        "category": "ambiguous",
+        "question": "Does the C16QS have an eSIM?",
+        "expected_behavior": "Depends on the SKU: GNAH/S00H variants have eSIM, GNAN/S00N do not. Should say it varies (status answered with that caveat, or ambiguous).",
+        "expected_status": [
+          "ambiguous",
+          "answered",
+          "answered_with_flags"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-product-page",
+            "sections": [
+              "Variants Available",
+              "eSIM",
+              "C16QS LTE Cat 1bis IoT Module",
+              "Key Highlights"
+            ]
+          },
+          {
+            "doc_id": "c16qs-at-command-manual",
+            "pages": [
+              "36"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "variant",
+            "depend",
+            "GNAH",
+            "option",
+            "SKU"
+          ]
+        ]
+      },
+      "result": {
+        "question": "Does the C16QS have an eSIM?",
+        "query": {
+          "keywords": [
+            "esim"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": null,
+          "bands": []
+        },
+        "status": "answered",
+        "answer": "The Cavli C16QS module is available with integrated eSIM options depending on the selected variant [WEB-snapshot-20261114-c81b8bc8-s27]. Variants with the suffix 'H' (e.g., GNAH or S00H) include an integrated eSIM, while variants with the suffix 'N' (e.g., GNAN or S00N) do not [WEB-snapshot-20261114-c81b8bc8-s16].",
+        "clarification": null,
+        "citations": [
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s16",
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "web page (no page numbers)",
+            "section": "Variants Available for Ordering Samples",
+            "url": "https://www.cavliwireless.com/iot-modules/c-series/c16qs#available-variants",
+            "quote": "Variants Available for Ordering Samples | Modules | GNSS | eSIM | Flash | C16QS-WW-GNAN-mPCIe | GNSS Yes | eSIM No | Flash 1.25 MB / 4 MB | C16QS-WW-GNAN | GNSS Yes | eSIM No | Flash 1.25 MB / 4 MB | C16QS-NA-GNAN | GNSS Yes | eSIM No | Flash 1.25 MB / 4 MB | C16QS-NA-GNAH | GNSS Yes | eSIM Yes | Flash 1.25 MB / 4 MB | C16QS-IN-GNAN | GNSS Yes | eSIM No | Flash 1.25 MB / 4 MB | C16QS-IN-GNAH | GNSS Yes | eSIM Yes | ..."
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s27",
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "web page (no page numbers)",
+            "section": "Go Beyond and Explore > Does C16QS support integrated eSIM?",
+            "url": "https://www.cavliwireless.com/iot-modules/c-series/c16qs#faq",
+            "quote": "Does C16QS support integrated eSIM? Yes, C16QS is available with integrated eSIM options depending on the selected variant. This helps OEMs simplify SIM provisioning and manage connectivity across regional and global IoT deployments through Cavli Hubble. 9 ."
+          }
+        ],
+        "related_context": [],
+        "review_flags": [],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s16",
+            "score": 0.9,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "page": null,
+            "section": "Variants Available for Ordering Samples"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s27",
+            "score": 0.8816,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "page": null,
+            "section": "Go Beyond and Explore > Does C16QS support integrated eSIM?"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s05",
+            "score": 0.7774,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "page": null,
+            "section": "Key Highlights"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s29",
+            "score": 0.7187,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "page": null,
+            "section": "Go Beyond and Explore > Which C16QS variant should I choose?"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s22",
+            "score": 0.7047,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "page": null,
+            "section": "Go Beyond and Explore > Is the C16QS module integrated with the Cavli Hubble Platform?"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s24",
+            "score": 0.6909,
+            "coverage": 1.0,
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "page": null,
+            "section": "Go Beyond and Explore > How does the C16QS module facilitate global connectivity?"
+          }
+        ],
+        "mode": "gemini:gemini-3.1-flash-lite",
+        "validation": {
+          "citations_in_retrieved_set": true,
+          "unknown_citations": [],
+          "numbers_supported": true,
+          "unsupported_numbers": [],
+          "passed": true
+        },
+        "note": null,
+        "usage": {
+          "input_tokens": 1690,
+          "output_tokens": 186
+        },
+        "elapsed_ms": 10440484
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s16",
+            "valid": true,
+            "reason": "quote found in re-extracted product page"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s27",
+            "valid": true,
+            "reason": "quote found in re-extracted product page"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H08",
+        "category": "conflict",
+        "question": "Does the C16QS-NA support LTE Band 13?",
+        "expected_behavior": "Hardware manual lists B13 for N.A; product page NA list omits it. Flag conflict, do not confirm.",
+        "expected_status": [
+          "conflict"
+        ],
+        "expected_sources": [
+          {
+            "doc_id": "c16qs-hardware-manual",
+            "pages": [
+              "12",
+              "14",
+              "54"
+            ]
+          },
+          {
+            "doc_id": "c16qs-product-page",
+            "sections": [
+              "Cellular Bands Supported"
+            ]
+          }
+        ],
+        "must_include": [
+          [
+            "13"
+          ]
+        ],
+        "expected_flags": [
+          "conflict"
+        ]
+      },
+      "result": {
+        "question": "Does the C16QS-NA support LTE Band 13?",
+        "query": {
+          "keywords": [
+            "na",
+            "support",
+            "lte",
+            "band",
+            "13"
+          ],
+          "phrases": [],
+          "variant": "NA",
+          "scope": null,
+          "bands": [
+            13
+          ]
+        },
+        "status": "conflict",
+        "answer": "Conflicting evidence for Band 13 on NA: listed in Cavli C16QS LTE CAT1.bis Module Hardware Manual 5.3 (pp. 12, 14, 54), but not listed in Cavli C16QS LTE Cat 1bis IoT Module product page snapshot-20261114-c81b8bc8 (Technical Data > Cellular Bands Supported). It is not treated as confirmed and is queued for expert review (item #3). Evidence: Cavli C16QS LTE CAT1.bis Module Hardware Manual 5.3 (p. 12): 2, 4, 5, 12, 13, 25, 66 [HW-v5.3-p012-2] | Cavli C16QS LTE Cat 1bis IoT Module product page snapshot-20261114-c81b8bc8 (Technical Data > Cellular Bands Supported): 2, 4, 5, 12, 25, 66 [WEB-snapshot-20261114-c81b8bc8-s08]",
+        "clarification": null,
+        "citations": [
+          {
+            "pid": "HW-v5.3-p012-2",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 12",
+            "section": "2.1 Module Introduction",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=12",
+            "quote": "2.1 Module Introduction C16QS integrates an application processing subsystem, a communication subsystem, multimedia and connectivity peripherals to enable a single chip 4G LTE feature phone solution. The C16QS communication subsystem integrates LTE CAT.1bis technology and a RF transceiver to cover 1/ 3/ 5/7/ 8/18/19/20/26/28/38/40/41 (E.A.J), 2 / 4/ 5/ 12/ 13/25/66(N.A), 1/3/5/8/20(E.A), 1 / 3/ 5/ 8/ 18/ 19/ 26/ 28 ..."
+          },
+          {
+            "pid": "HW-v5.3-p014-1",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 14",
+            "section": "2.2 Module Characteristics",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=14",
+            "quote": "Frequency Band LTE BANDS: E.A.J: - 1/ 3/ 5/ 7/ 8/ 18/19/20/26/28/38/40/41 N.A: - 2/ 4/ 5/ 12/ 13/ 25/ 66 A.N: - 1/ 3/ 5/ 8/ 18/ 19/ 26/ 28 L.A: - 1/2/ 3/ 4/ 5/ 7/ 8/ 28 W.W: - 1/ 2/ 3/ 4/ 5/ 7/ 8/ 12/ 13/ 18/ 19/ 20/ 25/ 26/ 28/ 38/ 40/ 41/66 E.A: - 1/3/5/8/20 E.U: - 1/ 3/ 5/ 7/ 8/ 20/ 28 I.N: - 1/3/5/8/40/41 Data Network ✓ FDD/TDD LTE CAT 1.bis ✓ Peak DL 10Mbps/ UL 5Mbps (CAT 1.bis) AT Command ✓ Support for ..."
+          },
+          {
+            "pid": "HW-v5.3-p054-2",
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "p. 54",
+            "section": "4.1 Chapter Overview",
+            "url": "https://www.tme.eu/Document/236509bdd47a1fae18533456c25b4f7b/C16QS-WW-GNAH-DTE.pdf#page=54",
+            "quote": "4.1 Chapter Overview The C16QS module RF overall specifications include the following sections: ✓ Working frequency ✓ GNSS Performances ✓ Antenna requirements ✓ 1/ 3/ 5/7/ 8/18/19/20/26/28/38/40/41 (E.A.J), 2 / 4/ 5/ 12/ 13/25/66(N.A), 1/3/5/8/20(E.A), 1 / 3/ 5/ 8/ 18/ 19/ 26/ 28 (A.N), 1/2/ 3/ 4/ 5/7/ 8 (L.A), 1/ 2/ 3/ 4/ 5/ 7/ 8/ 12/13/ 18/ 19/ 20/ 25/ 26/ 28/38/40/ 41/ 66 (W.W),1/3/5/8/40/41(I.N)and 1/ 3/ 5/ 7/ ..."
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s08",
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "revision_status": "current",
+            "simulated": false,
+            "location": "web page (no page numbers)",
+            "section": "Technical Data > Cellular Bands Supported",
+            "url": "https://www.cavliwireless.com/iot-modules/c-series/c16qs#technical-data",
+            "quote": "Cellular Bands Supported EAJ : 1/ 3/ 5/ 7/ 8/ 18/19/20/26/28/40/41 EU : 1/ 3/ 5/ 7/ 8/ 20/ 28 NA : 2/ 4/ 5/ 12/ 25/ 66 AN : 1/ 3/ 5/ 8/ 18/ 19/ 26/ 28 LA : 1/2/ 3/ 4/ 5/ 7/ 8 IN : 1/3/5/8/40/41 WW : 1/ 2/ 3/ 4/ 5/ 7/ 8/ 12/ 18/ 19/ 20/ 25/ 26/ 28/40/ 41/66"
+          }
+        ],
+        "related_context": [],
+        "review_flags": [
+          {
+            "review_id": 3,
+            "kind": "conflict",
+            "severity": "high",
+            "topic": "bands:NA",
+            "summary": "NA variant LTE band list differs (cross-source); disputed bands: 13. Do not treat any disputed band as confirmed."
+          }
+        ],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "HW-v5.3-p012-2",
+            "score": 0.622,
+            "coverage": 0.6,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "12",
+            "section": "Module Introduction"
+          },
+          {
+            "pid": "HW-v5.3-p014-1",
+            "score": 0.7974,
+            "coverage": 0.8,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "14",
+            "section": "Module Characteristics"
+          },
+          {
+            "pid": "HW-v5.3-p054-2",
+            "score": null,
+            "coverage": null,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "54",
+            "section": "Chapter Overview"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s08",
+            "score": 0.7879,
+            "coverage": 0.6,
+            "document": "Cavli C16QS LTE Cat 1bis IoT Module product page",
+            "revision": "snapshot-20261114-c81b8bc8",
+            "page": null,
+            "section": "Technical Data > Cellular Bands Supported"
+          },
+          {
+            "pid": "HW-v5.3-p074-2",
+            "score": 0.72,
+            "coverage": 0.6,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "74",
+            "section": "IC Information"
+          },
+          {
+            "pid": "HW-v5.3-p061-1",
+            "score": 0.5831,
+            "coverage": 0.4,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "61",
+            "section": "Power Consumption Characteristics"
+          }
+        ],
+        "mode": "structured band claims",
+        "validation": null,
+        "note": null,
+        "usage": null,
+        "elapsed_ms": 138
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": true,
+        "citation_checks": [
+          {
+            "pid": "HW-v5.3-p012-2",
+            "valid": true,
+            "reason": "quote found on PDF page 12 (printed 12)"
+          },
+          {
+            "pid": "HW-v5.3-p014-1",
+            "valid": true,
+            "reason": "quote found on PDF page 14 (printed 14)"
+          },
+          {
+            "pid": "HW-v5.3-p054-2",
+            "valid": true,
+            "reason": "quote found on PDF page 54 (printed 54)"
+          },
+          {
+            "pid": "WEB-snapshot-20261114-c81b8bc8-s08",
+            "valid": true,
+            "reason": "quote found in re-extracted product page"
+          }
+        ],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H09",
+        "category": "unanswerable",
+        "question": "What is the MTBF of the C16QS module?",
+        "expected_behavior": "Not verified: no MTBF figure in any source.",
+        "expected_status": [
+          "not_verified"
+        ],
+        "expected_sources": []
+      },
+      "result": {
+        "question": "What is the MTBF of the C16QS module?",
+        "query": {
+          "keywords": [
+            "mtbf"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": null,
+          "bands": []
+        },
+        "status": "not_verified",
+        "answer": "Not verified in the available C16QS sources. The closest passages do not cover the question's key terms.",
+        "clarification": null,
+        "citations": [],
+        "related_context": [],
+        "review_flags": [],
+        "warnings": [],
+        "retrieved": [],
+        "mode": "coverage threshold",
+        "validation": null,
+        "note": null,
+        "usage": null,
+        "elapsed_ms": 2
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": null,
+        "citation_checks": [],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    },
+    {
+      "case": {
+        "id": "H10",
+        "category": "unanswerable",
+        "question": "Is the C16QS certified on the Verizon network?",
+        "expected_behavior": "Not verified: no carrier certification statement in any source.",
+        "expected_status": [
+          "not_verified"
+        ],
+        "expected_sources": []
+      },
+      "result": {
+        "question": "Is the C16QS certified on the Verizon network?",
+        "query": {
+          "keywords": [
+            "certified",
+            "verizon",
+            "network"
+          ],
+          "phrases": [],
+          "variant": null,
+          "scope": null,
+          "bands": []
+        },
+        "status": "not_verified",
+        "answer": "Not verified in the available C16QS sources. The closest passages do not cover the question's key terms.",
+        "clarification": null,
+        "citations": [],
+        "related_context": [],
+        "review_flags": [],
+        "warnings": [],
+        "retrieved": [
+          {
+            "pid": "HW-v5.3-p074-4",
+            "score": 0.5998,
+            "coverage": 0.333,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "74",
+            "section": "FCC Modular Approval Information Examples for Manual"
+          },
+          {
+            "pid": "HW-v5.3-p075-3",
+            "score": 0.5985,
+            "coverage": 0.333,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "75",
+            "section": "OEM Integration Instructions"
+          },
+          {
+            "pid": "HW-v5.3-p076-2",
+            "score": 0.5611,
+            "coverage": 0.333,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "76",
+            "section": "Upgrade Firmware"
+          },
+          {
+            "pid": "HW-v5.3-p077-2",
+            "score": 0.5516,
+            "coverage": 0.333,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "77",
+            "section": "Limited module procedures"
+          },
+          {
+            "pid": "HW-v5.3-p078-3",
+            "score": 0.5139,
+            "coverage": 0.333,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "78",
+            "section": "Antennas"
+          },
+          {
+            "pid": "HW-v5.3-p076-1",
+            "score": 0.4975,
+            "coverage": 0.333,
+            "document": "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+            "revision": "5.3",
+            "page": "76",
+            "section": "Validity of using the module certification"
+          }
+        ],
+        "mode": "coverage threshold",
+        "validation": null,
+        "note": null,
+        "usage": null,
+        "elapsed_ms": 13
+      },
+      "score": {
+        "status_ok": true,
+        "retrieval_hit": true,
+        "expected_source_cited": true,
+        "citations_valid": null,
+        "citation_checks": [],
+        "facts_missing": [],
+        "flags_missing": [],
+        "passed": true,
+        "failure_category": "none"
+      }
+    }
+  ]
+}

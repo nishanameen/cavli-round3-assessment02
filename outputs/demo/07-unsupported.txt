@@ -1,0 +1,24 @@
+> python -m docintel ask "Is the C16QS certified for use with my custom-designed antenna?"
+
+Q: Is the C16QS certified for use with my custom-designed antenna?
+[NOT VERIFIED IN AVAILABLE SOURCES]  mode=guardrail:custom_certification  13 ms
+  Not verified in the available C16QS sources. The sources do not certify any specific custom
+  antenna or end product. The hardware manual only states the conditions under which the module's
+  FCC authorization stays valid, and it names no approved antenna models. Escalate to Cavli support
+  and a certification specialist; human approval is required. Related passages shown as context
+  only: HW 5.3 p. 75 §9.4.3 OEM Integration Instructions; HW 5.3 p. 76 §9.4.4 Validity of using the
+  module certification; HW 5.3 p. 74 §9.3 IC Information.
+Related context (not an answer):
+  [HW-v5.3-p075-3] Cavli C16QS LTE CAT1.bis Module Hardware Manual rev 5.3, p. 75, 9.4.3 OEM Integration Instructions
+  [HW-v5.3-p076-1] Cavli C16QS LTE CAT1.bis Module Hardware Manual rev 5.3, p. 76, 9.4.4 Validity of using the module certification
+  [HW-v5.3-p074-1] Cavli C16QS LTE CAT1.bis Module Hardware Manual rev 5.3, p. 74, 9.3 IC Information
+Retrieved: HW-v5.3-p075-3(0.8357), HW-v5.3-p076-1(0.7322), HW-v5.3-p074-1(0.6909), HW-v5.3-p078-3(0.7875), HW-v5.3-p077-4(0.7051)
+
+
+> python -m docintel ask "What is the MTBF of the C16QS module?"
+
+Q: What is the MTBF of the C16QS module?
+[NOT VERIFIED IN AVAILABLE SOURCES]  mode=coverage threshold  2 ms
+  Not verified in the available C16QS sources. The closest passages do not cover the question's key
+  terms.
+Retrieved: 

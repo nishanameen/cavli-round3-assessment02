@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>C16QS Documentation Intelligence: Architecture and Validation Note</title>
+<style>
+  @page { size: A4; margin: 15mm 15mm 14mm 15mm; }
+  :root { --ink:#1b2430; --muted:#5b6675; --rule:#d7dde4; --accent:#0f6b5c; --soft:#eef4f2; --warn:#8a4b0f; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", Arial, sans-serif; color: var(--ink); font-size: 9.6pt; line-height: 1.38; margin: 0; }
+  h1 { font-size: 15.5pt; margin: 0 0 2pt; letter-spacing: -0.2pt; }
+  .sub { color: var(--muted); font-size: 9pt; margin-bottom: 8pt; }
+  h2 { font-size: 11pt; color: var(--accent); margin: 10pt 0 3pt; border-bottom: 1px solid var(--rule); padding-bottom: 2pt; }
+  h3 { font-size: 9.8pt; margin: 6pt 0 2pt; }
+  p { margin: 0 0 5pt; }
+  ul { margin: 0 0 5pt 14pt; padding: 0; }
+  li { margin: 0 0 2pt; }
+  table { border-collapse: collapse; width: 100%; margin: 3pt 0 6pt; font-size: 8.6pt; }
+  th, td { border-bottom: 1px solid var(--rule); padding: 2.5pt 4pt; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 600; }
+  code { font-family: Consolas, monospace; font-size: 8.6pt; background: #f3f5f7; padding: 0 2px; border-radius: 2px; }
+  .kpi { display: flex; gap: 6pt; margin: 4pt 0 6pt; }
+  .kpi div { flex: 1; background: var(--soft); border-radius: 4px; padding: 4pt 6pt; }
+  .kpi b { display: block; font-size: 13pt; color: var(--accent); }
+  .kpi span { font-size: 8pt; color: var(--muted); }
+  .note { font-size: 8.4pt; color: var(--muted); }
+  .warn { color: var(--warn); }
+  svg text { font-family: "Segoe UI", Arial, sans-serif; }
+  .break { break-before: page; }
+</style>
+</head>
+<body>
+<h1>C16QS Documentation Intelligence: Architecture and Validation Note</h1>
+<div class="sub">Cavli Round 3, Assignment 2 · Nishan · 15 November 2026 · Python CLI + hosted web prototype · Public sources only</div>
+
+<h2>1. What was built</h2>
+<p>A repeatable pipeline ingests four public sources for the <b>Cavli C16QS</b> LTE Cat 1bis module:</p>
+<ul>
+  <li>Hardware Manual 5.3</li>
+  <li>EVK User Manual 1.1</li>
+  <li>AT Command Manual 3.1</li>
+  <li>The official product page</li>
+</ul>
+<p>The pipeline indexes 659 passages with page, section and revision metadata. Answers are cited to document, revision and printed page or web section. The system also:</p>
+<ul>
+  <li>flags ambiguity (bare module vs EVK; regional variant)</li>
+  <li>refuses unsupported inferences</li>
+  <li>sends conflicts, broken cross-references and revision changes to an expert review queue.</li>
+</ul>
+<p>All results below come from actual runs. They're stored in <code>outputs/</code>.</p>
+<div class="kpi">
+  <div><b>14/14</b><span>main evaluation set (Gemini + validator, run 2)</span></div>
+  <div><b>10/10</b><span>held-out set, single run after tuning froze</span></div>
+  <div><b>16/16</b><span>fresh set C on the live default: 10 answered, 6 refused</span></div>
+  <div><b>6</b><span>documentation issues auto-queued for review</span></div>
+</div>
+
+<h2>2. Architecture</h2>
+<svg viewBox="0 0 720 210" width="100%" role="img" aria-label="Pipeline from sources to answers and review queue">
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b6675"/></marker></defs>
+  <g font-size="10">
+    <rect x="4" y="8" width="128" height="86" rx="6" fill="#eef4f2" stroke="#0f6b5c"/>
+    <text x="68" y="24" text-anchor="middle" font-weight="600">sources/manifest.json</text>
+    <text x="12" y="40">HW 5.3 PDF (TME)</text><text x="12" y="53">EVK 1.1 PDF (MC Tech)</text>
+    <text x="12" y="66">AT 3.1 PDF (itbrainpower)</text><text x="12" y="79">Product page (Cavli)</text>
+    <rect x="160" y="8" width="132" height="86" rx="6" fill="#fff" stroke="#5b6675"/>
+    <text x="226" y="24" text-anchor="middle" font-weight="600">fetch.py</text>
+    <text x="168" y="40">download, check SHA-256</text><text x="168" y="53">or use hash-matched</text>
+    <text x="168" y="66">inbox copy; changed file</text><text x="168" y="79">→ stop for review</text>
+    <rect x="320" y="8" width="138" height="86" rx="6" fill="#fff" stroke="#5b6675"/>
+    <text x="389" y="24" text-anchor="middle" font-weight="600">extract.py</text>
+    <text x="328" y="40">pypdfium2 page text</text><text x="328" y="53">printed-label offset check</text>
+    <text x="328" y="66">header strip, TOC skip</text><text x="328" y="79">section headings, chunking</text>
+    <rect x="486" y="8" width="230" height="86" rx="6" fill="#fff" stroke="#5b6675"/>
+    <text x="601" y="24" text-anchor="middle" font-weight="600">ingest.py → SQLite (store.py)</text>
+    <text x="494" y="40">documents ≠ revisions (doc_id vs revision+hash)</text>
+    <text x="494" y="53">pages, passages, FTS5 (porter, BM25)</text>
+    <text x="494" y="66">same text hash → unchanged (idempotent)</text>
+    <text x="494" y="79">newer revision → older superseded + page diff</text>
+    <rect x="486" y="116" width="230" height="86" rx="6" fill="#fff7ee" stroke="#8a4b0f"/>
+    <text x="601" y="132" text-anchor="middle" font-weight="600">checks.py → expert review queue</text>
+    <text x="494" y="148">band lists per variant across/within sources</text>
+    <text x="494" y="161">AT commands referenced but undocumented</text>
+    <text x="494" y="174">unversioned references to newer docs</text>
+    <text x="494" y="187">revision changes (numeric = high severity)</text>
+    <rect x="4" y="116" width="200" height="86" rx="6" fill="#fff" stroke="#5b6675"/>
+    <text x="104" y="132" text-anchor="middle" font-weight="600">retrieve.py</text>
+    <text x="12" y="148">query terms + domain expansions</text><text x="12" y="161">FTS5 BM25 top 60, current revisions</text>
+    <text x="12" y="174">rerank: BM25 + keyword/unit coverage</text><text x="12" y="187">+ phrase, scope, front-matter rules</text>
+    <rect x="230" y="116" width="230" height="86" rx="6" fill="#eef4f2" stroke="#0f6b5c"/>
+    <text x="345" y="132" text-anchor="middle" font-weight="600">answer.py</text>
+    <text x="238" y="148">guardrails → not verified + context</text><text x="238" y="161">bands → structured claims, conflicts</text>
+    <text x="238" y="174">supply voltage, no scope → ambiguous (2 scopes)</text><text x="238" y="187">else Gemini JSON → validator → or extractive</text>
+  </g>
+  <g stroke="#5b6675" stroke-width="1.3" fill="none" marker-end="url(#a)">
+    <path d="M132,51 L158,51"/><path d="M292,51 L318,51"/><path d="M458,51 L484,51"/>
+    <path d="M601,94 L601,114"/><path d="M540,94 C470,104 220,98 110,114"/><path d="M204,159 L228,159"/>
+    <path d="M486,170 L462,170"/>
+  </g>
+</svg>
+<p>The local CLI (<code>python -m docintel ingest | ask | sources | review | simulate-revision | eval | publish</code>) and the website show the same fields for every answer:</p>
+<ul>
+  <li>the status: answered, answered with flags, ambiguous, conflict or not verified</li>
+  <li>the answer, plus a clarifying question when the question is ambiguous</li>
+  <li>citations: title, revision and its status, printed page (and PDF page), section, a deep link (<code>#page=N</code> or <code>#anchor</code>) and the quote</li>
+  <li>review flags, the retrieved passages with their scores, the mode used, and the elapsed time.</li>
+</ul>
+
+<h3>Hosted prototype</h3>
+<p><b>Live site:</b> <code>cavli-assignment-2.nishanameenk.workers.dev</code>, behind a reviewer login. It's a Cloudflare Worker serving four tabs (Ask, Review queue, Pipeline and Sources) plus a switch to the simulated-revision view.</p>
+<ul>
+  <li><b>Engine.</b> <code>web/src/engine.ts</code> is a line-for-line TypeScript port of the answer engine, so the hosted and local runs are scored by the same code.</li>
+  <li><b>Data.</b> It lives in a separate <code>docintel</code> schema in the existing Supabase project. The schema isn't exposed through the API, has RLS enabled and no policies, and only the service role can call its SQL functions. A token-checked edge function sits in front.</li>
+  <li><b>Tokens.</b> The runtime token is read-only. The publish token can write and expires. Only SHA-256 hashes are stored.</li>
+  <li><b>Search.</b> Postgres full-text search (<code>ts_rank</code>) replaces SQLite BM25 for candidates. The rerank after it is the same. Every passage also has a gte-small and a Gemini vector, so hybrid search can be selected per request (§4).</li>
+  <li><b>Pipeline tab (read-only).</b> It shows the five stages with real counts, a per-document table, the revision timeline and run history. Its "Check sources for updates" button compares live ETag and size (PDFs) or visible text (product page) with the fingerprint recorded at publish time. It only detects change: re-indexing stays in the controlled pipeline because it needs human approval.</li>
+  <li><b>Publishing.</b> <code>python -m docintel publish</code> pushes the verified index (current and simulated views). It's idempotent, and an expert's resolutions survive re-publishing.</li>
+</ul>
+<p>Assignment 1's Worker, tables and function are untouched.</p>
+
+<h2>3. Ingestion and source updates</h2>
+<ul>
+  <li><b>Identity vs revision.</b> <code>documents</code> holds stable identity: title, publisher, type and scope. <code>revisions</code> holds the following per revision: label, date and where the date came from, URL, host, file SHA-256, extracted-text SHA-256, acquisition route, status, the simulated flag and the page-label offset. Page numbers are never invented. Each page's printed label is kept only when it matches the offset found across the document (EVK: printed = PDF + 1). Web passages carry section names and anchors, not pages.</li>
+  <li><b>Repeatable and idempotent.</b> Re-running ingest leaves an unchanged text hash marked <code>unchanged</code>. That was verified twice, and with a live product-page refresh whose raw HTML had changed but whose text hadn't. A from-scratch run with an empty cache rebuilt the same 659 passages in 13 s.</li>
+  <li><b>Revisions.</b> A new revision row is ingested next to the old one. The newest becomes <code>current</code> and the older one becomes <code>superseded</code> but stays retained. The pipeline then diffs the pages, records the changed lines with old and new passage IDs, and adds a <code>revision_change</code> review item (severity high if any number changed).
+    <ul>
+      <li>Normal retrieval reads current revisions only. <code>--all-revisions</code> shows both, labelled OUTDATED.</li>
+      <li>A PDF whose bytes change at the same URL stops ingest, so a person must add a manifest entry.</li>
+      <li>A product page whose text changes becomes a new dated snapshot.</li>
+    </ul>
+  </li>
+  <li><b>Demonstration (simulated, labelled).</b> The v5.1 manual couldn't be retrieved: one host timed out and the mirror sits behind a browser check. So <code>5.4-SIMULATED</code> applies two edits to the stored 5.3 text, changing the reset pulse to 150–500 ms. Re-indexing superseded 5.3 and isolated the changed sentence on p. 31. The answer now cites 5.4 with a SIMULATED warning, shows the previous 5.3 wording, and links review item #7. Re-applying it gives <code>unchanged</code>. The simulation never touches the main index.</li>
+</ul>
+
+<h2>4. Retrieval and answer generation</h2>
+<p><b>Keyword retrieval</b> (the local CLI, and one half of the live hybrid search): SQLite FTS5 with BM25 (Postgres full text on the live site) (section text weighted ×2), then a transparent rerank. The rerank combines normalised BM25, the share of question keywords covered (with domain expansions such as reset → RSTN and units such as "5V" → voltage), and a bonus for exact phrases (<code>JMP 3</code>, <code>AT$QCRST</code>, pin numbers). It also applies scope rules: EVK vs module hints, a penalty for the AT manual on non-command questions, and a penalty for unsectioned front matter. Results are de-duplicated per page.</p>
+<p><b>Measured in three steps.</b> The 24 evaluation questions use the manuals' words, so three everyday-wording sets were written, each before the change it tested: A (14), B (12) and C (10 answerable plus 6 that must be refused, with the decision rule written into the file). Hybrid search fuses keyword and pgvector results (reciprocal rank fusion). The <i>gate</i> decides whether the model is asked: a word-overlap pre-filter, or the model itself judging the passages.</p>
+<table>
+  <tr><th>Configuration (live site)</th><th>Set A</th><th>Set B</th><th>Set C</th><th>Main + held-out</th></tr>
+  <tr><td>Keyword + word-overlap gate (old default)</td><td>7/14</td><td>10/12</td><td>13/16</td><td>24/24</td></tr>
+  <tr><td>Hybrid gte-small + word-overlap gate</td><td>5/14</td><td>10/12</td><td>–</td><td>24/24</td></tr>
+  <tr><td>Hybrid Gemini + word-overlap gate</td><td>6/14</td><td>10/12</td><td>15/16</td><td>24/24</td></tr>
+  <tr><td><b>Hybrid Gemini + model-judged gate (default)</b></td><td><b>11/14</b></td><td><b>12/12</b></td><td><b>16/16</b></td><td>23/24 *</td></tr>
+</table>
+<p>gte-small scored unrelated pages as high as correct ones. Gemini found more passages (12/14 vs 9/14 in the top 5 on set A), but the word-overlap gate then refused them, and similarity can't replace that gate because unanswerable questions score just as high. Letting the model judge answerability met the pre-set rule on set C: 10/10 answered and 6/6 refused, against 8/10 and 5/6. It became the default. * E06 was refused during a Gemini timeout (the pre-switch run scored 14/14). Details: <code>docs/RETRIEVAL-EXPERIMENT.md</code>.</p>
+<p><b>Answering</b> follows a fixed order of checks.</p>
+<ul>
+  <li><b>Guardrails.</b> Battery life without a duty cycle, and certification of a custom antenna or product, return "Not verified in the available C16QS sources". The related passages are shown as context only, with an escalation route.</li>
+  <li><b>Band questions</b> are answered from structured per-variant band claims, never by the model. No variant → ambiguous, with a clarifying question. A disputed band → conflict: both passages are shown, nothing is confirmed, and the review item is linked.</li>
+  <li><b>Supply-voltage questions without a scope</b> → separate module and EVK answers plus a clarifying question.</li>
+  <li><b>Otherwise</b> → <code>gemini-3.1-flash-lite</code> (temperature 0, JSON output) sees only the retrieved passages. It must cite passage IDs in every sentence and may return <code>not_verified</code>.</li>
+</ul>
+
+<h2>5. Accuracy controls and validation</h2>
+<ul>
+  <li><b>Answer validator.</b> Every cited ID must be among the retrieved passages, and every number in the answer must occur as a whole number in a cited passage. Otherwise the answer is rejected and replaced by an extractive quote, and the reason is recorded. In a unit test the validator accepted "100-500ms" and rejected an invented "150".</li>
+  <li><b>Answerability.</b> On the live site the model judges whether the retrieved passages answer the question, and may return "not verified". If the model is unavailable, the answer is "not verified", never quotes posing as an answer. The local CLI keeps a word-overlap pre-filter (40% of keywords) before the model.</li>
+  <li><b>Citation verification in evaluation.</b> Each cited page is re-extracted from the hash-verified source file. The quote must appear on that page with the same printed label. Every citation in every scored run passed (125/125 across the final live runs).</li>
+  <li><b>Review flags</b> attach by topic and cited passage (for example, the AT+TRB gap appears on answers that cite p. 31). Answers that rely on conflicting, changed or undocumented evidence get the status "answered with flags"; the low-severity outdated-reference flag is shown without changing the status.</li>
+</ul>
+<table>
+  <tr><th>Run (all in <code>outputs/</code>)</th><th>Answerable</th><th>Ambiguous</th><th>Conflict</th><th>Unanswerable</th><th>Revision</th><th>Total</th><th>Citations valid</th></tr>
+  <tr><td>Main set, Gemini, run 2 (with retry)</td><td>7/7</td><td>2/2</td><td>1/1</td><td>3/3</td><td>1/1</td><td><b>14/14</b></td><td>31/31</td></tr>
+  <tr><td>Main set, Gemini, run 1 (no retry)</td><td>6/7</td><td>2/2</td><td>1/1</td><td>3/3</td><td>1/1</td><td>13/14</td><td>33/33</td></tr>
+  <tr><td>Main set, extractive only (no model)</td><td>5/7</td><td>2/2</td><td>1/1</td><td>2/3</td><td>1/1</td><td>11/14</td><td>38/38</td></tr>
+  <tr><td>Held-out set, Gemini, single run</td><td>5/5</td><td>2/2</td><td>1/1</td><td>2/2</td><td>–</td><td><b>10/10</b></td><td>16/16</td></tr>
+  <tr><td>Live site, main set (final default)</td><td>6/7</td><td>2/2</td><td>1/1</td><td>3/3</td><td>1/1</td><td>13/14</td><td>31/31</td></tr>
+  <tr><td>Live site, held-out set (final default)</td><td>5/5</td><td>2/2</td><td>1/1</td><td>2/2</td><td>–</td><td><b>10/10</b></td><td>23/23</td></tr>
+</table>
+<p class="note">In run 1, E02 failed because Gemini timed out, and the extractive fallback returned the Table 3.3 heading without its values. That led to one retry with backoff (run 2). The main set was used during tuning. The held-out questions were written afterwards, their expected answers were looked up in the documents, and they were run once. On the live site the validator repeatedly rejected one Gemini citation to a non-existent passage (<code>HW-v3.1-p031-2</code>). A refusal that listed checked passages as citations was fixed so that they show only as context (13/14 → 14/14). A Playwright check of the live site passed 18/18 on desktop and at 375 px, including the Pipeline tab. Failure categories and documentation fixes are in <code>docs/FAILURES-REPORT.md</code>; the hosted evidence is in <code>outputs/HOSTED-VERIFICATION.md</code>.</p>
+
+<h2>6. Security and privacy</h2>
+<ul>
+  <li><b>Hosted access.</b> Every page and API call needs the reviewer login; anonymous requests get 401. Secrets are Worker secrets only. The CSP is strict (<code>script-src 'self'</code>), and the page inserts server text with <code>textContent</code>, never as HTML.</li>
+  <li><b>Keys.</b> The Gemini key lives only in the git-ignored <code>.env</code>. It's read from the environment, sent only as the <code>x-goog-api-key</code> header, and never logged, stored or packaged. <code>.env.example</code> holds the variable names only.</li>
+  <li><b>Data.</b> Only public documents and the user's question go to the model. No customer data, internal Cavli systems or credentials are used.</li>
+  <li><b>Untrusted input.</b> Downloaded files are treated as data. PDFs are parsed, never executed. Pinned hashes catch tampering or silent replacement. Browser checks are never bypassed.</li>
+  <li><b>Human approval.</b> Conflicts and revision changes are never auto-resolved. An expert resolves them with <code>review --resolve ID --note</code>. Nothing is published or sent to customers.</li>
+</ul>
+
+<h2>7. Models, services, costs and limits</h2>
+<ul>
+  <li><b>Software.</b> Python 3.12 standard library, plus <code>pypdfium2</code> 5.13 and SQLite FTS5 for the CLI. Hosted: a Cloudflare Worker, plus Supabase Postgres with pgvector and an edge function (gte-small built in). No paid service.</li>
+  <li><b>Quotas.</b> <code>gemini-embedding-001</code> allows 1,000 requests/day per Google project on the free tier. Documents are embedded once through a content-addressed cache; each hybrid question needs one call. A backup key from a second project takes over after a 429, for embeddings and answers. If both fail, the site falls back to keyword search and says so.</li>
+  <li><b>Model.</b> Google Gemini <code>gemini-3.1-flash-lite</code> through the Generative Language API, using the key already created for Assignment 1 (a separate local copy; Assignment 1 is untouched). A generated answer averaged about 1,650 input and about 100 output tokens. Median latency was about 1.4 s. A retried call took 8–15 s, and calls are capped at 20 s plus one retry. Retrieval runs locally in about 5–50 ms. Cost per answer is small, but rate limits and pricing depend on the key's Google tier, which I haven't confirmed. Without a key everything still works in extractive mode (11/14).</li>
+</ul>
+
+<h2>8. Assumptions, simulations and known limitations</h2>
+<ul>
+  <li><b>Simulated:</b> hardware manual revision 5.4 (labelled everywhere). <b>Not implemented:</b> scheduled re-ingest, a repair retry for rejected citations, and an entailment check at the level of individual claims.</li>
+  <li>Answers that sit in long mixed tables are still hard to retrieve ("thickness", "how big", "peak transmit current"). The next lever is row-level table passages. The answerability decision relies on the model's judgement, with guardrails and the validator around it.</li>
+  <li>The three manuals come from distributor or vendor hosts. Identity is confirmed from Cavli's cover pages and version history, but there's no official download URL.</li>
+  <li>Scope, variant, guardrail and band parsing are rule-based for this module family. Other products would need new patterns.</li>
+  <li>Table cells can extract out of order, so a section label near a table can be off by one, though the page stays correct. Figures and images aren't read.</li>
+  <li>The validator checks citations and numbers, not every claim. The held-out H07 answer turned the eSIM legend into an "H suffix" rule without the validator noticing.</li>
+  <li>An evaluation of 24 questions is a smoke test, not a benchmark.</li>
+</ul>
+</body>
+</html>

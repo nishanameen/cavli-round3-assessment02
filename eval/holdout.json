@@ -1,0 +1,88 @@
+{
+  "description": "Held-out questions written after the main set was tuned. Expected answers were looked up in the documents before the first run; the system was not changed after running these.",
+  "cases": [
+    {
+      "id": "H01", "category": "answerable",
+      "question": "What is the default UART baud rate of the C16QS?",
+      "expected_behavior": "115200 bps (Table 2.1 or UART1 section).",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["13", "34", "35"]}],
+      "must_include": [["115200"]]
+    },
+    {
+      "id": "H02", "category": "answerable",
+      "question": "How long must POWER_KEY be held low to turn on the C16QS?",
+      "expected_behavior": "At least 500 ms (Section 3.4.1).",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["30"]}],
+      "must_include": [["500"]]
+    },
+    {
+      "id": "H03", "category": "answerable",
+      "question": "What type of SIM card socket does the C16QS EVK use?",
+      "expected_behavior": "Micro SIM card socket (EVK component 11).",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-evk-user-manual", "pages": ["13"]}],
+      "must_include": [["micro"]]
+    },
+    {
+      "id": "H04", "category": "answerable",
+      "question": "What is the C16QS current consumption in Hibernate mode?",
+      "expected_behavior": "11 µA (Table 5.5).",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["61"]}],
+      "must_include": [["11"]]
+    },
+    {
+      "id": "H05", "category": "answerable",
+      "question": "Which command enables internet access through RNDIS on the C16QS EVK?",
+      "expected_behavior": "AT$QCNETDEVCTL=3,1 via the AT port (EVK p. 21); AT manual 16.36 documents the command.",
+      "expected_status": ["answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-evk-user-manual", "pages": ["21"]},
+                           {"doc_id": "c16qs-at-command-manual", "pages": ["197", "198"]}],
+      "must_include": [["QCNETDEVCTL"]]
+    },
+    {
+      "id": "H06", "category": "ambiguous",
+      "question": "What is the maximum input voltage?",
+      "expected_behavior": "Scope unclear: bare module VBAT max 4.5 V vs EVK 5 V input; ask which.",
+      "expected_status": ["ambiguous"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["13", "20", "27", "28", "60"]},
+                           {"doc_id": "c16qs-evk-user-manual", "pages": ["11", "13", "14", "16", "17", "18"]}],
+      "must_include": [["4.5"]]
+    },
+    {
+      "id": "H07", "category": "ambiguous",
+      "question": "Does the C16QS have an eSIM?",
+      "expected_behavior": "Depends on the SKU: GNAH/S00H variants have eSIM, GNAN/S00N do not. Should say it varies (status answered with that caveat, or ambiguous).",
+      "expected_status": ["ambiguous", "answered", "answered_with_flags"],
+      "expected_sources": [{"doc_id": "c16qs-product-page", "sections": ["Variants Available", "eSIM", "C16QS LTE Cat 1bis IoT Module", "Key Highlights"]},
+                           {"doc_id": "c16qs-at-command-manual", "pages": ["36"]}],
+      "must_include": [["variant", "depend", "GNAH", "option", "SKU"]]
+    },
+    {
+      "id": "H08", "category": "conflict",
+      "question": "Does the C16QS-NA support LTE Band 13?",
+      "expected_behavior": "Hardware manual lists B13 for N.A; product page NA list omits it. Flag conflict, do not confirm.",
+      "expected_status": ["conflict"],
+      "expected_sources": [{"doc_id": "c16qs-hardware-manual", "pages": ["12", "14", "54"]},
+                           {"doc_id": "c16qs-product-page", "sections": ["Cellular Bands Supported"]}],
+      "must_include": [["13"]],
+      "expected_flags": ["conflict"]
+    },
+    {
+      "id": "H09", "category": "unanswerable",
+      "question": "What is the MTBF of the C16QS module?",
+      "expected_behavior": "Not verified: no MTBF figure in any source.",
+      "expected_status": ["not_verified"],
+      "expected_sources": []
+    },
+    {
+      "id": "H10", "category": "unanswerable",
+      "question": "Is the C16QS certified on the Verizon network?",
+      "expected_behavior": "Not verified: no carrier certification statement in any source.",
+      "expected_status": ["not_verified"],
+      "expected_sources": []
+    }
+  ]
+}
