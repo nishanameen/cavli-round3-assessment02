@@ -2,7 +2,7 @@
 
 **URL:** https://cavli-assignment-2.nishanameenk.workers.dev. Sign in as `reviewer`; the password is shared separately and is stored as `REVIEWER_PASSWORD` in the git-ignored `.env`.
 
-**Current deployment:** Cloudflare Worker `cavli-assignment-2`, version `e66e6454-96ae-48d3-a1a0-9405590ca617` (16 November 2026). It runs the code of version `aa9e149f`, with a reviewer-password change on top; the script hashes are identical.
+**Current deployment:** Cloudflare Worker `cavli-assignment-2`, version `87a0f7d9-3485-41d1-8bbc-fbce4a65580a` (16 November 2026), which adds the reviewer sign-in page to `e66e6454-96ae-48d3-a1a0-9405590ca617`. Earlier note on e66e6454: It runs the code of version `aa9e149f`, with a reviewer-password change on top; the script hashes are identical.
 - **Defaults:** `RETRIEVAL_DEFAULT = hybrid` (keyword plus Gemini vectors) and `GATE_DEFAULT = model` (the model judges answerability).
 - **Answer logic:** the final record runs (rows marked f8d276a4) used version `f8d276a4`. Its successors 729ea59c, 23c967cf and 53c29280 changed only the page: an answerability label, the redesign and the Thinking Orb. On 16 November, two fixes from `docs/FAILURES-REPORT.md` changed the answer logic:
   - F21 (`aa58d4cb`): a validator rejection is reported as such, not as an outage. A revision label such as "5.4" passes the number check when it is written as a revision. Superseded passages are tagged for the model, so it answers from the later revision first.
@@ -27,7 +27,10 @@
 
 | Check | Version | Result | Evidence |
 |---|---|---|---|
-| Anonymous page and API | e66e6454 | 401 / 401 | `browser-check-hosted.json` |
+| Anonymous page and API | 87a0f7d9 | 401 / 401 (the page is the sign-in card) | `browser-check-hosted.json` |
+| Reviewer sign-in page: anonymous card (401), anonymous API 401, wrong password error, correct password opens the app with an HttpOnly cookie, /login redirect, Basic header, sign-out, 390 px, no CSP errors | 87a0f7d9 | **9/9** | `signin/signin-check.json`, `signin/*.png` |
+| Playwright, same 18 checks, signed in through the form | 87a0f7d9 | 17/18, no console errors. The miss was the reset-pin answer: Gemini returned HTTP 503 and the site refused safely ("model unavailable"). Asked again straight afterwards, the same question was answered correctly (pin 17), then refused once more on another 503. | `browser-check-hosted.json` |
+| Thinking Orb loading state, signed in through the form | 87a0f7d9 | Passed, no errors | `orb-check-hosted.json` |
 | Main set (14), default | f8d276a4 | **13/14**, 31/31 citations valid. E06 was refused because Gemini timed out ("model unavailable"); the pre-switch candidate run (694e364e) scored 14/14. | `EVALUATION-hosted-gemini-judge.md` |
 | Held-out set (10), default | f8d276a4 | **10/10**, 23/23 | `EVALUATION-holdout-hosted-gemini-judge.md` |
 | Set C (16: 10 answerable, 6 must-refuse), default | f8d276a4 | **16/16**, 19/19 | `EVALUATION-paraphrase-c-hosted-gemini-judge.md` |

@@ -1,44 +1,48 @@
 {
   "base": "https://cavli-assignment-2.nishanameenk.workers.dev",
-  "checked_at": "2026-11-16T16:48:03.793Z",
-  "passed": 15,
+  "checked_at": "2026-11-16T17:31:24.031Z",
+  "passed": 17,
   "total": 18,
   "results": [
     {
       "name": "Reviewer gate rejects anonymous requests",
       "passed": true,
-      "ms": 234,
+      "ms": 452,
       "page_status": 401,
       "api_status": 401
     },
     {
       "name": "Page loads with logo, header, view switch, tabs and prompt chips",
       "passed": true,
-      "ms": 1606,
+      "ms": 2913,
       "suggestion_chips": 13
     },
     {
       "name": "Answerable: reset pin answer cites HW p. 31 with a working deep link",
       "passed": false,
-      "ms": 12168,
+      "ms": 26923,
       "error": "status Not verified in available sources"
     },
     {
       "name": "Retrieved passages and validation expand",
       "passed": true,
-      "ms": 93,
+      "ms": 75,
       "retrieved_rows": 6
     },
     {
       "name": "Ambiguous: supply voltage asks module vs EVK and cites both",
-      "passed": false,
-      "ms": 10109,
-      "error": "status Not verified in available sources"
+      "passed": true,
+      "ms": 17516,
+      "status": "Ambiguous · please clarify",
+      "cited_documents": [
+        "Cavli C16QS LTE CAT1.bis Module Hardware Manual",
+        "Cavli C16QS EVK User Manual (Connection Manual)"
+      ]
     },
     {
       "name": "Conflict: WW Band 38 shows both sources and a review flag",
       "passed": true,
-      "ms": 2703,
+      "ms": 1625,
       "status": "Conflicting evidence · expert review",
       "flags": [
         "#4 Conflicting sources (high): WW variant LTE band list differs (cross-source); disputed bands: 13, 38. Do not treat any disputed band as confirmed."
@@ -47,32 +51,36 @@
     {
       "name": "Not verified: custom antenna shows related context only",
       "passed": true,
-      "ms": 1600,
+      "ms": 2098,
       "status": "Not verified in available sources"
     },
     {
       "name": "Not verified: MTBF is refused",
       "passed": true,
-      "ms": 5979,
+      "ms": 25451,
       "status": "Not verified in available sources",
-      "mode": "5.85 s · hybrid search · AI-judged answerability · gemini:gemini-3.1-flash-lite · current sources"
+      "mode": "24.65 s · hybrid search · AI-judged answerability · model unavailable · current sources"
     },
     {
       "name": "Keyboard: Enter submits a typed question",
       "passed": true,
-      "ms": 18803,
+      "ms": 3405,
       "answer": "The C16QS EVK uses a micro sim card socket."
     },
     {
       "name": "Simulated view: banner, SIMULATED citation and previous wording",
-      "passed": false,
-      "ms": 24969,
-      "error": "answer lacks 150-500 ms"
+      "passed": true,
+      "ms": 17017,
+      "answer": "To reset the C16QS module, the reset pin (Pin 17) must be pulled low for 150-500ms [1]. This information is provided from a simulated revision [1].",
+      "warnings": [
+        "Cites a SIMULATED revision - not a Cavli publication.",
+        "Passage changed in 5.4-SIMULATED vs 5.3 (p. 31): was “software does not respond, the module can be reset. Pull the pin low for 100-500ms to reset the module. The” (review #13)."
+      ]
     },
     {
       "name": "Audit mode: superseded 5.3 passage is labelled outdated",
       "passed": true,
-      "ms": 12287,
+      "ms": 15319,
       "retrieved": [
         "HW-v5.3-p031-2",
         "HW-v5.4-SIMULATED-p031-2",
@@ -89,7 +97,7 @@
     {
       "name": "Review queue (simulated view): revision diff, inline validation, resolve and reopen",
       "passed": true,
-      "ms": 2132,
+      "ms": 4069,
       "item": "#13",
       "diff": [
         "+ 5.4 [SIMULATED] Updated reset pulse width in Section 3.4.2",
@@ -100,20 +108,20 @@
     {
       "name": "Sources (simulated view): 5 revisions incl. superseded 5.3 and SIMULATED 5.4",
       "passed": true,
-      "ms": 264,
+      "ms": 885,
       "sources": 5
     },
     {
       "name": "Main view: 6 open review items, disputed bands bold, 4 sources with EVK page offset",
       "passed": true,
-      "ms": 1149,
+      "ms": 1773,
       "open_items": 6,
       "sources": 4
     },
     {
       "name": "Pipeline tab: 5 stages, per-document table, run history and a read-only update check",
       "passed": true,
-      "ms": 2713,
+      "ms": 2903,
       "stages": [
         "Acquire",
         "Extract",
@@ -125,15 +133,15 @@
       "update_check": [
         "AT 3.1 | HTTP headers (ETag + size) | Unchanged",
         "EVK 1.1 | HTTP headers (ETag + size) | Unchanged",
-        "HW 5.3 | HTTP headers | Cannot tell from headers",
+        "HW 5.3 | HTTP headers | Host blocked check",
         "WEB snapshot-20261114-c81b8bc8 | page text fingerprint (Technical Data + Variants) | Unchanged"
       ]
     },
     {
       "name": "Answers report the search mode and show keyword and meaning columns",
       "passed": true,
-      "ms": 32222,
-      "meta": "31.93 s · hybrid search · AI-judged answerability · gemini:gemini-3.1-flash-lite · current sources",
+      "ms": 20404,
+      "meta": "19.79 s · hybrid search · AI-judged answerability · gemini:gemini-3.1-flash-lite · current sources",
       "headers": [
         "Passage",
         "Score",
@@ -148,13 +156,13 @@
     {
       "name": "Mobile 375 px: no horizontal overflow and answers render",
       "passed": true,
-      "ms": 2976,
+      "ms": 5996,
       "overflow_px": 0
     },
     {
       "name": "No console errors during the run",
       "passed": true,
-      "ms": 0
+      "ms": 1
     }
   ]
 }

@@ -1,0 +1,46 @@
+{
+  "base": "https://cavli-assignment-2.nishanameenk.workers.dev",
+  "checked_at": "2026-11-16T17:25:58.630Z",
+  "passed": 9,
+  "total": 9,
+  "results": [
+    {
+      "name": "Anonymous visit shows the sign-in card (401) with logo and font",
+      "passed": true,
+      "status": 401
+    },
+    {
+      "name": "Anonymous API request is refused with JSON 401",
+      "passed": true
+    },
+    {
+      "name": "Wrong password shows the inline error and keeps the username",
+      "passed": true
+    },
+    {
+      "name": "Correct password opens the app and sets an HttpOnly session cookie",
+      "passed": true,
+      "cookie_expires_in_days": 7
+    },
+    {
+      "name": "Signed-in visit to /login goes straight to the app",
+      "passed": true
+    },
+    {
+      "name": "Basic credentials sent up front still work (automated checks)",
+      "passed": true
+    },
+    {
+      "name": "Sign-out returns to the sign-in card",
+      "passed": true
+    },
+    {
+      "name": "Mobile 390 px: card fits with no horizontal scroll",
+      "passed": true
+    },
+    {
+      "name": "No page or CSP errors",
+      "passed": true
+    }
+  ]
+}

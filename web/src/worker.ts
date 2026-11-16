@@ -1,3 +1,4 @@
+import { reviewGate } from './review-gate';
 import { answer, type Bundle, type EmbedModel, type Gate, type Generator, type Retrieval, type Row, type Store, type View } from './engine';
 import { checkSource, type SourceRow } from './watch';
 
@@ -187,13 +188,10 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const deployed = new URL(request.url).hostname.endsWith('.workers.dev');
     if (deployed && !env.DEMO_ACCESS_SECRET) return new Response('Reviewer access is not configured.', { status: 503 });
-    if (env.DEMO_ACCESS_SECRET) {
-      const expected = 'Basic ' + btoa('reviewer:' + env.DEMO_ACCESS_SECRET);
-      if (!fixedEqual(request.headers.get('Authorization') ?? '', expected)) {
-        return new Response('Reviewer sign-in required.', { status: 401, headers: {
-          'WWW-Authenticate': 'Basic realm="Cavli C16QS documentation", charset="UTF-8"', 'Cache-Control': 'no-store' } });
-      }
-    }
+    // Reviewer sign-in card (session cookie), or Basic credentials sent up front by automated checks.
+    const gated = await reviewGate(request, env.DEMO_ACCESS_SECRET,
+      { product: 'C16QS Documentation Intelligence', assignment: 'Assignment 2' }, (r) => env.ASSETS.fetch(r));
+    if (gated) return gated;
     const resp = await route(request, env);
     const out = new Response(resp.body, resp);
     out.headers.set('X-Content-Type-Options', 'nosniff');

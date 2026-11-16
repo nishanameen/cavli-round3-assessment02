@@ -1,0 +1,55 @@
+/* Reviewer sign-in card. Layout follows the Astryx "login-card" template (logo and product above a centred 400 px card,
+   heading, large fields, primary button, supporting line below); styling matches the prototypes. */
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/space-grotesk-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 500; font-display: swap; src: url(/fonts/space-grotesk-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/space-grotesk-latin-600-normal.woff2) format("woff2"); }
+
+:root {
+  --ink: #18201a; --muted: #5a645d; --line: rgba(24, 32, 26, 0.14); --page: #f5f6f1; --card: #ffffff;
+  --lime: #c6f432; --error: #b42318; --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { background: var(--page); color: var(--ink); font: 400 15px/1.5 "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.005em; -webkit-font-smoothing: antialiased; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.auth { min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px; }
+.auth-column { width: 100%; max-width: 400px; display: grid; gap: 22px; justify-items: center;
+  animation: rise 0.45s var(--ease-out) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+
+.auth-brand { display: grid; justify-items: center; gap: 4px; }
+.auth-brand img { display: block; width: 132px; height: auto; margin: -14px 0 -10px; }
+.auth-brand p { margin: 0; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+
+.auth-card { width: 100%; display: grid; gap: 20px; padding: 32px; background: var(--card); border-radius: 20px;
+  box-shadow: inset 0 0 0 0.5px var(--line), 0 1px 2px rgba(20, 40, 20, 0.05), 0 24px 48px -28px rgba(20, 40, 20, 0.35); }
+.auth-head { text-align: center; display: grid; gap: 4px; }
+.auth-head h1 { margin: 0; font-size: 24px; line-height: 1.2; font-weight: 500; letter-spacing: -0.035em; }
+.auth-head p { margin: 0; font-size: 14px; color: var(--muted); }
+
+.auth-fields { display: grid; gap: 10px; }
+.auth-fields input { width: 100%; height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px;
+  background: #fff; color: var(--ink); font: inherit; font-size: 16px; outline: none;
+  transition: border-color 0.16s ease, box-shadow 0.2s ease; }
+.auth-fields input::placeholder { color: color-mix(in srgb, var(--ink) 42%, transparent); }
+.auth-fields input:focus { border-color: color-mix(in srgb, var(--lime) 70%, #18201a); box-shadow: 0 0 0 4px color-mix(in srgb, var(--lime) 24%, transparent); }
+.auth-fields input[aria-invalid="true"] { border-color: var(--error); }
+.auth-fields input[aria-invalid="true"]:focus { box-shadow: 0 0 0 4px color-mix(in srgb, var(--error) 14%, transparent); }
+.auth-error { margin: 0; font-size: 13px; color: var(--error); }
+
+.auth-card button { height: 48px; border: 0; border-radius: 12px; background: var(--ink); color: #fff; font: inherit;
+  font-size: 15px; font-weight: 500; cursor: pointer; transition: background-color 0.16s ease, transform 0.14s var(--ease-out); }
+.auth-card button:hover { background: #2a342c; }
+.auth-card button:active { transform: scale(0.98); }
+.auth-card button:focus-visible { outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--lime) 45%, transparent); }
+
+.auth-note { margin: 0; text-align: center; font-size: 13px; line-height: 1.55; color: var(--muted); }
+
+@media (max-width: 440px) { .auth-card { padding: 26px 22px; } }
+@media (prefers-reduced-motion: reduce) {
+  .auth-column { animation: none; }
+  .auth-fields input, .auth-card button { transition: none; }
+  .auth-card button:active { transform: none; }
+}

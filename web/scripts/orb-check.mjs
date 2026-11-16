@@ -8,11 +8,18 @@ const hosted = base.includes('.workers.dev');
 let password;
 if (hosted) password = (await readFile(new URL('../../.env', import.meta.url), 'utf8')).match(/^REVIEWER_PASSWORD=(.+)$/m)?.[1]?.trim();
 const browser = await chromium.launch({ executablePath: process.env.CAVLI_CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', headless: true });
+// The site shows its own sign-in page (no browser credentials challenge), so each browser context signs in through the
+// real form first; the context's request client shares its cookies with the pages.
+async function signIn(ctx, origin, password) {
+  const r = await ctx.request.post(origin + '/login', { form: { username: 'reviewer', password }, maxRedirects: 0 });
+  if (r.status() !== 303) throw new Error(`sign-in failed (HTTP ${r.status()})`);
+}
 const results = {};
 try {
   for (const [name, opts] of [['desktop', { viewport: { width: 1440, height: 900 } }], ['mobile', { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }],
     ['reduced-motion', { viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' }]]) {
-    const ctx = await browser.newContext({ ...opts, deviceScaleFactor: 2, httpCredentials: hosted ? { username: 'reviewer', password } : undefined });
+    const ctx = await browser.newContext({ ...opts, deviceScaleFactor: 2 });
+    if (hosted) await signIn(ctx, base, password);
     const p = await ctx.newPage();
     const errors = []; p.on('pageerror', (e) => errors.push(e.message));
     // Hold the answer back briefly so the loading state can be measured; the request itself is unchanged.

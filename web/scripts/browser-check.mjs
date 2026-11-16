@@ -18,7 +18,6 @@ if (hosted && !password) {
   const env = await readFile(new URL('../../.env', import.meta.url), 'utf8');
   password = env.match(/^REVIEWER_PASSWORD=(.+)$/m)?.[1]?.trim();
 }
-const credentials = hosted ? { username: 'reviewer', password } : undefined;
 
 const results = [];
 const consoleErrors = [];
@@ -34,10 +33,17 @@ async function check(name, fn) {
   }
 }
 function expect(cond, message) { if (!cond) throw new Error(message); }
+// The site shows its own sign-in page (no browser credentials challenge), so each browser context signs in through the
+// real form first; the context's request client shares its cookies with the pages.
+async function signIn(ctx, origin, password) {
+  const r = await ctx.request.post(origin + '/login', { form: { username: 'reviewer', password }, maxRedirects: 0 });
+  if (r.status() !== 303) throw new Error(`sign-in failed (HTTP ${r.status()})`);
+}
 
 const browser = await chromium.launch({ executablePath: chrome, headless: true });
 // Reduced motion holds the prompt-chip rows still (upstream behaviour), so screenshots are stable.
-const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, httpCredentials: credentials, reducedMotion: 'reduce' });
+const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
+if (hosted) await signIn(context, base, password);
 const page = await context.newPage();
 page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
 page.on('pageerror', (e) => consoleErrors.push(String(e)));
@@ -261,7 +267,8 @@ await check('Answers report the search mode and show keyword and meaning columns
 });
 
 await check('Mobile 375 px: no horizontal overflow and answers render', async () => {
-  const mobile = await browser.newContext({ viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true, httpCredentials: credentials, reducedMotion: 'reduce' });
+  const mobile = await browser.newContext({ viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
+  if (hosted) await signIn(mobile, base, password);
   const m = await mobile.newPage();
   await m.goto(base + '/', { waitUntil: 'networkidle' });
   await pickChip(m, 'Which LTE bands does the C16QS support?');

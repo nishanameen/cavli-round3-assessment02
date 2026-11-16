@@ -10,7 +10,7 @@ It runs two ways: as a local Python CLI, and as a hosted web prototype.
 
 ## Hosted prototype
 
-**https://cavli-assignment-2.nishanameenk.workers.dev** — sign in as `reviewer`. The password is in the submission PDF (locally it's `REVIEWER_PASSWORD` in the ignored `.env`).
+**https://cavli-assignment-2.nishanameenk.workers.dev** — it opens on a reviewer sign-in page: sign in as `reviewer` with the password from the submission PDF (locally it's `REVIEWER_PASSWORD` in the ignored `.env`). The site opens on a reviewer sign-in page (a server-rendered card, `web/src/review-gate.ts` and `web/public/login.css`, laid out after the Astryx login-card template). A correct password sets a signed, HttpOnly session cookie for seven days. Automated checks sign in through the same form; `Authorization: Basic` sent up front is also accepted.
 
 The page has four tabs:
 - **Ask:** suggested questions drift past in rows of prompt chips, one row per case type (answerable; ambiguous and conflicting; should refuse and the simulated revision). Clicking a chip flies it into the question bar and types the full question; press Enter or Send to ask. Answers with a status badge, numbered citations that open the PDF at the cited page, and a panel showing the retrieved passages (keyword coverage, meaning similarity) and the validation result.
@@ -35,7 +35,7 @@ Verified live (answer logic f8d276a4, page 53c29280 after the redesign and loadi
 - paraphrase sets B 12/12 and A 11/14 (the old default scored 10/12 and 7/14)
 - Playwright browser check 18/18 on the redesigned page, desktop and 375 px mobile, including the Pipeline tab.
 
-Current live version: **e66e6454** (16 November 2026). It runs version aa9e149f's code, with a reviewer-password change on top. It adds fixes F21 and F22 from [`docs/FAILURES-REPORT.md`](docs/FAILURES-REPORT.md):
+Current live version: **87a0f7d9** (16 November 2026): the reviewer sign-in page on top of e66e6454, which runs version aa9e149f's code with a reviewer-password change. It adds fixes F21 and F22 from [`docs/FAILURES-REPORT.md`](docs/FAILURES-REPORT.md):
 - A validator rejection is no longer reported as an outage.
 - Revision labels such as "5.4" pass the number check when written as a revision.
 - The model answers from the later revision first.

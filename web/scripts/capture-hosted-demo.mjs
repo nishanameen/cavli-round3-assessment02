@@ -11,8 +11,14 @@ await mkdir(out, { recursive: true });
 const file = (n) => new URL(`${String(n).padStart(2, '0')}.png`, out).pathname.replace(/^\/([A-Z]:)/, '$1');
 
 const browser = await chromium.launch({ executablePath: process.env.CAVLI_CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
-const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1,
-  httpCredentials: base.includes('workers.dev') ? { username: 'reviewer', password } : undefined });
+// The site shows its own sign-in page (no browser credentials challenge), so each browser context signs in through the
+// real form first; the context's request client shares its cookies with the pages.
+async function signIn(ctx, origin, password) {
+  const r = await ctx.request.post(origin + '/login', { form: { username: 'reviewer', password }, maxRedirects: 0 });
+  if (r.status() !== 303) throw new Error(`sign-in failed (HTTP ${r.status()})`);
+}
+const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 1 });
+if (base.includes('workers.dev')) await signIn(ctx, base, password);
 const page = await ctx.newPage();
 let n = 0;
 async function frame(target) {
